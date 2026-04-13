@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>鴻記國際有限公司</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #F0EBE3;
+      --surface: #E8E2DA;
+      --dark:    #1C1A17;
+      --muted:   #7A7268;
+      --accent:  #3D3830;
+      --warm:    #C4956A;
+      --border:  rgba(28,26,23,.1);
+      --serif:   'Playfair Display', Georgia, serif;
+      --sans:    'Inter', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--dark); font-family: var(--sans); line-height: 1.7; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--warm); border-radius: 2px; }
+    img { display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Utility ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); font-weight: 500; margin-bottom: 20px;
+    }
+    .label::before { content: '■'; font-size: .45rem; color: var(--warm); }
+    .btn-outline {
+      display: inline-block; padding: 12px 28px;
+      border: 1px solid var(--dark); color: var(--dark);
+      font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+      font-weight: 500; transition: all .3s; cursor: pointer;
+      font-family: var(--sans); background: transparent;
+    }
+    .btn-outline:hover { background: var(--dark); color: var(--bg); }
+    .btn-light {
+      display: inline-block; padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,.6); color: #fff;
+      font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+      font-weight: 500; transition: all .3s; cursor: pointer; font-family: var(--sans);
+    }
+    .btn-light:hover { background: #fff; color: var(--dark); }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 72px;
+      background: rgba(240,235,227,.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-left { display: flex; gap: 36px; }
+    .nav-left a { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 500; transition: color .2s; }
+    .nav-left a:hover { color: var(--dark); }
+    .nav-logo { position: absolute; left: 50%; transform: translateX(-50%); }
+    .nav-logo img { height: 56px; width: 56px; object-fit: contain; }
+    .nav-logo-text { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .04em; color: var(--dark); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .lang-toggle { display: flex; gap: 0; border: 1px solid var(--border); }
+    .lang-btn {
+      padding: 5px 12px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+      background: transparent; border: none; cursor: pointer; color: var(--muted);
+      font-family: var(--sans); font-weight: 500; transition: all .2s;
+    }
+    .lang-btn.active { background: var(--dark); color: var(--bg); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; }
+    .hamburger span { width: 22px; height: 1.5px; background: var(--dark); }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      overflow: hidden; padding-top: 64px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: opacity 1.4s ease;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(20,16,12,.35) 0%, rgba(20,16,12,.55) 60%, rgba(20,16,12,.75) 100%);
+    }
+    .hero-slides-wrap { position: absolute; inset: 0; }
+    .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.4s ease; }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(15,11,7,.3) 0%, rgba(15,11,7,.5) 50%, rgba(15,11,7,.8) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 40px 60px; max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .hero-eyebrow { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 20px; font-weight: 400; }
+    .hero-title {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4.8rem);
+      font-weight: 900; line-height: 1.05; color: #fff;
+      margin-bottom: 28px; letter-spacing: -.01em;
+    }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,.7); max-width: 400px; margin-bottom: 36px; line-height: 1.6; font-weight: 300; }
+    .hero-bottom {
+      position: absolute; bottom: 40px; right: 40px; z-index: 2;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+    }
+    .hero-dots { display: flex; gap: 6px; }
+    .hero-dot { width: 24px; height: 2px; background: rgba(255,255,255,.3); border: none; cursor: pointer; transition: all .3s; padding: 0; }
+    .hero-dot.active { background: #fff; width: 40px; }
+    .hero-slide-label { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+
+    /* ── About ── */
+    #about { background: var(--bg); }
+    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; border-bottom: 1px solid var(--border); }
+    .about-photo { position: relative; overflow: hidden; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+    .about-photo:hover img { transform: scale(1.03); }
+    .about-text {
+      padding: 80px 64px; display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid var(--border);
+    }
+    .about-headline { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.25; margin-bottom: 36px; }
+    .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .about-col-label { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+    .about-col-text { font-size: .88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── Stats bar ── */
+    .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); }
+    .stat-item { padding: 40px 32px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; color: var(--dark); line-height: 1; margin-bottom: 6px; }
+    .stat-lbl { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── Products ── */
+    #products { background: var(--bg); padding: 80px 0 0; }
+    .products-header { padding: 0 40px 56px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .products-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; }
+    .products-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--border); }
+    .product-card {
+      position: relative; overflow: hidden; aspect-ratio: 3/4;
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .product-card:nth-child(3n) { border-right: none; }
+    .product-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .8s ease; filter: brightness(.88);
+    }
+    .product-card:hover img { transform: scale(1.05); filter: brightness(.7); }
+    .product-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,11,7,.85) 0%, rgba(15,11,7,.2) 50%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
+      transition: background .4s;
+    }
+    .product-card:hover .product-overlay { background: linear-gradient(to top, rgba(15,11,7,.92) 0%, rgba(15,11,7,.4) 60%, rgba(15,11,7,.1) 100%); }
+    .product-num { font-size: .68rem; letter-spacing: .16em; color: rgba(255,255,255,.5); margin-bottom: 6px; text-transform: uppercase; }
+    .product-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .product-tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .ptag { font-size: .64rem; padding: 3px 8px; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.7); letter-spacing: .06em; }
+    .product-desc-hover {
+      font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.5;
+      max-height: 0; overflow: hidden; transition: max-height .4s ease;
+    }
+    .product-card:hover .product-desc-hover { max-height: 120px; }
+    /* Thumbnail strip at bottom of card */
+    .product-thumbs {
+      display: flex; gap: 3px; margin-top: 10px;
+      max-height: 0; overflow: hidden; transition: max-height .4s ease;
+    }
+    .product-card:hover .product-thumbs { max-height: 50px; }
+    .product-thumbs img { width: 40px; height: 32px; object-fit: cover; opacity: .6; transition: opacity .2s; cursor: pointer; }
+    .product-thumbs img:hover { opacity: 1; }
+
+    /* ── Feature strip ── */
+    .features-strip { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+    .feature-item { padding: 36px 32px; border-right: 1px solid var(--border); }
+    .feature-item:last-child { border-right: none; }
+    .feature-icon { font-size: 1.4rem; margin-bottom: 12px; }
+    .feature-val { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+    .feature-lbl { font-size: .72rem; color: var(--muted); letter-spacing: .06em; line-height: 1.4; }
+
+    /* ── Applications ── */
+    #applications { padding: 100px 0; background: var(--bg); }
+    .app-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+    .app-title { font-family: var(--serif); font-size: clamp(2rem,4vw,3rem); font-weight: 700; }
+    .app-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+    .app-card { position: relative; aspect-ratio: 1; overflow: hidden; cursor: default; }
+    .app-card-bg { width: 100%; height: 100%; object-fit: cover; filter: brightness(.7); transition: transform .6s, filter .4s; }
+    .app-card:hover .app-card-bg { transform: scale(1.06); filter: brightness(.5); }
+    .app-card-info {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 24px;
+      background: linear-gradient(to top, rgba(15,11,7,.7) 0%, transparent 60%);
+    }
+    .app-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .app-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .app-desc { font-size: .75rem; color: rgba(255,255,255,.6); }
+
+    /* ── Certifications ── */
+    #certifications { background: var(--surface); padding: 100px 0; border-top: 1px solid var(--border); }
+    .certs-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    .certs-left .big-title { font-family: var(--serif); font-size: clamp(2rem,4vw,3.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 24px; }
+    .certs-left p { font-size: .92rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .cert-badges { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .cert-badge {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 18px 16px; text-align: center;
+    }
+    .cert-badge strong { display: block; font-size: .9rem; font-weight: 700; margin-bottom: 3px; }
+    .cert-badge span { font-size: .7rem; color: var(--muted); }
+    .honors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .honor-item { padding: 24px; border: 1px solid var(--border); background: var(--bg); }
+    .honor-icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .honor-item h4 { font-size: .9rem; font-weight: 600; margin-bottom: 4px; }
+    .honor-item p { font-size: .78rem; color: var(--muted); }
+
+    /* ── Portfolio / Cases ── */
+    #cases { background: var(--bg); padding: 100px 0 0; }
+    .cases-header { padding: 0 40px 48px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .cases-title { font-family: var(--serif); font-size: clamp(2rem,4vw,3rem); font-weight: 700; }
+    .cases-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .case-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
+    .case-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s, filter .4s; filter: brightness(.85); }
+    .case-card:hover img { transform: scale(1.06); filter: brightness(.6); }
+    .case-info {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 24px;
+      background: linear-gradient(to top, rgba(15,11,7,.7) 0%, transparent 55%);
+    }
+    .case-region { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 5px; }
+    .case-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .case-type { font-size: .72rem; color: rgba(255,255,255,.55); }
+
+    /* ── Manufacturing ── */
+    #manufacturing { background: var(--dark); color: var(--bg); padding: 100px 0; }
+    .mfg-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mfg-left .label { color: rgba(240,235,227,.4); }
+    .mfg-left .label::before { color: var(--warm); }
+    .mfg-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; color: var(--bg); line-height: 1.2; margin-bottom: 20px; }
+    .mfg-desc { font-size: .92rem; color: rgba(240,235,227,.55); line-height: 1.7; margin-bottom: 40px; }
+    .mfg-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .mfg-stat { border-top: 1px solid rgba(240,235,227,.12); padding-top: 16px; }
+    .mfg-stat-num { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--warm); }
+    .mfg-stat-lbl { font-size: .75rem; color: rgba(240,235,227,.45); letter-spacing: .06em; margin-top: 3px; }
+    .mfg-right { display: flex; flex-direction: column; gap: 1px; }
+    .equip-row {
+      display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+      background: rgba(240,235,227,.04); border: 1px solid rgba(240,235,227,.08);
+      transition: background .2s;
+    }
+    .equip-row:hover { background: rgba(240,235,227,.08); }
+    .equip-ico { font-size: 1rem; opacity: .6; }
+    .equip-nm  { font-size: .85rem; color: rgba(240,235,227,.7); }
+
+    /* ── Contact ── */
+    #contact { background: var(--bg); padding: 100px 0; border-top: 1px solid var(--border); }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    .contact-left .big-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    .contact-left p { font-size: .92rem; color: var(--muted); line-height: 1.7; margin-bottom: 40px; }
+    .contact-items { display: flex; flex-direction: column; }
+    .contact-row { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); align-items: center; }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-ico { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0; }
+    .contact-lbl { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .contact-val { font-size: .9rem; font-weight: 500; }
+    .contact-val a { color: var(--dark); }
+    .contact-val a:hover { color: var(--warm); }
+    .form { display: flex; flex-direction: column; gap: 12px; }
+    .form input, .form textarea, .form select {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--dark); padding: 14px 16px; font-family: var(--sans); font-size: .88rem;
+      width: 100%; outline: none; transition: border-color .2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form input:focus, .form textarea:focus { border-color: var(--dark); }
+    .form textarea { resize: vertical; min-height: 110px; }
+    .form input::placeholder, .form textarea::placeholder { color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark); color: var(--bg);
+      padding: 48px 40px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; }
+    .footer-center { font-size: .72rem; color: rgba(240,235,227,.4); letter-spacing: .08em; text-align: center; }
+    .footer-right { font-size: .72rem; color: rgba(240,235,227,.4); text-align: right; }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(15,11,7,.95); align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lbImg { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+    .lb-close { position: absolute; top: 24px; right: 32px; background: none; border: none; color: rgba(255,255,255,.5); font-size: 1.8rem; cursor: pointer; }
+    .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,.4); font-size: 3rem; cursor: pointer; padding: 20px; }
+    .lb-prev { left: 0; } .lb-next { right: 0; }
+    .lb-count { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: .75rem; color: rgba(255,255,255,.4); letter-spacing: .1em; }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: var(--bg); border-bottom: 1px solid var(--border); padding: 24px 40px;
+    }
+    #mobile-menu a { display: block; padding: 12px 0; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .about-wrap, .certs-wrap, .mfg-wrap, .contact-wrap { grid-template-columns: 1fr; }
+      .products-grid, .cases-grid { grid-template-columns: 1fr 1fr; }
+      .app-grid { grid-template-columns: 1fr 1fr; }
+      .stats-bar, .features-strip { grid-template-columns: 1fr 1fr; }
+      .about-text { padding: 48px 32px; border-left: none; border-top: 1px solid var(--border); }
+      .nav-left, .nav-right > a { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .products-grid, .cases-grid, .app-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 3rem; }
+      .container { padding: 0 20px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .about-cols { grid-template-columns: 1fr; }
+      .stats-bar, .features-strip { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Lightbox ── -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <button class="lb-prev"  onclick="lbMove(-1)">‹</button>
+  <img id="lbImg" src="" alt="" />
+  <button class="lb-next"  onclick="lbMove(1)">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="nav-left">
+    <a href="#products"       data-i18n="nav.products">Products</a>
+    <a href="#about"          data-i18n="nav.about">About</a>
+    <a href="#certifications" data-i18n="nav.certs">Certifications</a>
+  </div>
+  <a href="#hero" class="nav-logo">
+    <img src="images/logo.png" alt="Hungchi" />
+  </a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contact" class="btn-outline" data-i18n="nav.contact">Contact Us</a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu">
+  <a href="#products"       onclick="toggleMenu()" data-i18n="nav.products">Products</a>
+  <a href="#about"          onclick="toggleMenu()" data-i18n="nav.about">About</a>
+  <a href="#certifications" onclick="toggleMenu()" data-i18n="nav.certs">Certifications</a>
+  <a href="#cases"          onclick="toggleMenu()" data-i18n="nav.cases">Portfolio</a>
+  <a href="#contact"        onclick="toggleMenu()" data-i18n="nav.contact">Contact</a>
+</div>
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="hero-slides-wrap" id="heroSlides">
+    <div class="hero-slide active" style="background-image:url('images/hero_building.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('images/products/starship_main.png')"></div>
+    <div class="hero-slide" style="background-image:url('images/products/apple_6.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('images/products/capsule_main.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('images/products/container_main.jpeg')"></div>
+  </div>
+
+  <div class="hero-content container">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Hungchi International · Est. 2026 · Taiwan</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero.t1">WE BUILD</span><br>
+      <span data-i18n="hero.t2">THE FUTURE</span><br>
+      <em style="font-style:normal;color:rgba(255,255,255,.5)" data-i18n="hero.t3">OF SPACE</em>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">Intelligent modular spaces — crafted for the world's most inspiring locations.</p>
+    <a href="#products" class="btn-light" data-i18n="hero.cta">Explore Products</a>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-slide-label" id="heroLabel" data-i18n="hero.label">Apple Cabin</div>
+    <div class="hero-dots">
+      <button class="hero-dot active" onclick="goSlide(0)"></button>
+      <button class="hero-dot" onclick="goSlide(1)"></button>
+      <button class="hero-dot" onclick="goSlide(2)"></button>
+      <button class="hero-dot" onclick="goSlide(3)"></button>
+      <button class="hero-dot" onclick="goSlide(4)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats Bar ── -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">500</div>
+    <div class="stat-lbl" data-i18n="stat.1">Units / Month</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">19,421</div>
+    <div class="stat-lbl" data-i18n="stat.2">m² Factory</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">70+</div>
+    <div class="stat-lbl" data-i18n="stat.3">Year Lifespan</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">210</div>
+    <div class="stat-lbl" data-i18n="stat.4">Technicians</div>
+  </div>
+</div>
+
+<!-- ── About ── -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-photo">
+      <img src="images/products/apple_6.jpeg" alt="Hungchi" />
+    </div>
+    <div class="about-text">
+      <div class="label" data-i18n="about.label">About Us</div>
+      <p class="about-headline" data-i18n="about.headline">
+        We design intelligent spaces that balance innovation, functionality, and a visionary approach for tomorrow's living.
+      </p>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.7;" data-i18n="about.desc">
+        Hungchi International Ltd. specializes in the R&D, production and export of high-end integrated pods and modular houses — delivering one-stop smart space solutions for global clients across Europe, Asia-Pacific, Africa and the Americas.
+      </p>
+      <div class="about-cols">
+        <div>
+          <div class="about-col-label" data-i18n="about.col1.label">What We Do</div>
+          <div class="about-col-text" data-i18n="about.col1.text">We design and manufacture modular structures, developing intelligent layouts, premium materials, and spatial solutions that support daily use and long-term comfort.</div>
+        </div>
+        <div>
+          <div class="about-col-label" data-i18n="about.col2.label">Our Approach</div>
+          <div class="about-col-text" data-i18n="about.col2.text">Our process is rooted in precision manufacturing, international certification, and collaborative service — from concept to global delivery.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Products ── -->
+<section id="products">
+  <div class="products-header container">
+    <div>
+      <div class="label" data-i18n="prod.label">Our Products</div>
+      <h2 class="products-title" data-i18n="prod.title">Our Portfolio</h2>
+    </div>
+    <a href="#contact" class="btn-outline" data-i18n="prod.cta">Request a Quote</a>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card" onclick="openLb(appleGal,0)">
+      <img src="images/products/apple_6.jpeg" alt="Apple Cabin" />
+      <div class="product-overlay">
+        <div class="product-num">01</div>
+        <div class="product-name" data-i18n="p1.name">Apple Cabin</div>
+        <div class="product-tags-row">
+          <span class="ptag" data-i18n="tag.solar">Solar</span>
+          <span class="ptag" data-i18n="tag.eco">Eco</span>
+          <span class="ptag" data-i18n="tag.smart">Smart Home</span>
+        </div>
+        <div class="product-desc-hover" data-i18n="p1.desc">Minimalist modular space with seamless splicing. Solar &amp; wind powered, Low-E double glass, available in aluminum, galvanized or bamboo finishes.</div>
+        <div class="product-thumbs">
+          <img src="images/products/apple_1.jpeg" onclick="event.stopPropagation();openLb(appleGal,0)" alt="" />
+          <img src="images/products/apple_2.jpeg" onclick="event.stopPropagation();openLb(appleGal,1)" alt="" />
+          <img src="images/products/apple_3.jpeg" onclick="event.stopPropagation();openLb(appleGal,2)" alt="" />
+          <img src="images/products/apple_4.jpeg" onclick="event.stopPropagation();openLb(appleGal,3)" alt="" />
+          <img src="images/products/apple_5.jpeg" onclick="event.stopPropagation();openLb(appleGal,4)" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openLb(starshipGal,0)">
+      <img src="images/products/starship_main.png" alt="Starship Cabin" />
+      <div class="product-overlay">
+        <div class="product-num">02</div>
+        <div class="product-name" data-i18n="p2.name">Starship Cabin</div>
+        <div class="product-tags-row">
+          <span class="ptag" data-i18n="tag.panorama">270° View</span>
+          <span class="ptag" data-i18n="tag.quick">1–2 Days</span>
+        </div>
+        <div class="product-desc-hover" data-i18n="p2.desc">Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days.</div>
+        <div class="product-thumbs">
+          <img src="images/products/starship_1.jpeg" onclick="event.stopPropagation();openLb(starshipGal,0)" alt="" />
+          <img src="images/products/starship_2.jpeg" onclick="event.stopPropagation();openLb(starshipGal,1)" alt="" />
+          <img src="images/products/starship_3.jpeg" onclick="event.stopPropagation();openLb(starshipGal,2)" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openLb(foldingGal,0)">
+      <img src="images/products/folding_main.jpeg" alt="Folding Room" />
+      <div class="product-overlay">
+        <div class="product-num">03</div>
+        <div class="product-name" data-i18n="p3.name">Folding Room</div>
+        <div class="product-tags-row">
+          <span class="ptag" data-i18n="tag.portable">Portable</span>
+          <span class="ptag" data-i18n="tag.water">Waterproof</span>
+        </div>
+        <div class="product-desc-hover" data-i18n="p3.desc">Double-wing folding house. Galvanized steel frame, compact for transport, fast deployment. Earthquake &amp; typhoon resistant.</div>
+        <div class="product-thumbs">
+          <img src="images/products/folding_1.jpeg" onclick="event.stopPropagation();openLb(foldingGal,0)" alt="" />
+          <img src="images/products/folding_2.jpeg" onclick="event.stopPropagation();openLb(foldingGal,1)" alt="" />
+          <img src="images/products/folding_3.jpeg" onclick="event.stopPropagation();openLb(foldingGal,2)" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openLb(containerGal,0)">
+      <img src="images/products/container_main.jpeg" alt="Container House" />
+      <div class="product-overlay">
+        <div class="product-num">04</div>
+        <div class="product-name" data-i18n="p4.name">Container House</div>
+        <div class="product-tags-row">
+          <span class="ptag" data-i18n="tag.stack">Stackable</span>
+          <span class="ptag" data-i18n="tag.custom">Custom</span>
+        </div>
+        <div class="product-desc-hover" data-i18n="p4.desc">Repurposed steel containers transformed into living and commercial spaces. Stackable in infinite configurations.</div>
+        <div class="product-thumbs">
+          <img src="images/products/container_1.jpeg" onclick="event.stopPropagation();openLb(containerGal,0)" alt="" />
+          <img src="images/products/container_2.jpeg" onclick="event.stopPropagation();openLb(containerGal,1)" alt="" />
+          <img src="images/products/container_3.jpeg" onclick="event.stopPropagation();openLb(containerGal,2)" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openLb(silentGal,0)">
+      <img src="images/products/silent_main.jpeg" alt="Silent Cabin" />
+      <div class="product-overlay">
+        <div class="product-num">05</div>
+        <div class="product-name" data-i18n="p5.name">Silent Cabin</div>
+        <div class="product-tags-row">
+          <span class="ptag" data-i18n="tag.db">30–40 dB</span>
+          <span class="ptag" data-i18n="tag.office">Office</span>
+        </div>
+        <div class="product-desc-hover" data-i18n="p5.desc">Professional acoustic solution. High-density soundproofing, LED lighting, ventilation, USB &amp; Bluetooth. For 1–2 or 4–6 persons.</div>
+        <div class="product-thumbs">
+          <img src="images/products/silent_3.jpeg" onclick="event.stopPropagation();openLb(silentGal,0)" alt="" />
+          <img src="images/products/silent_2.jpeg" onclick="event.stopPropagation();openLb(silentGal,1)" alt="" />
+          <img src="images/products/silent_3.jpeg" onclick="event.stopPropagation();openLb(silentGal,2)" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openLb(capsuleGal,0)">
+      <img src="images/products/capsule_main.jpeg" alt="Space Capsule" />
+      <div class="product-overlay">
+        <div class="product-num">06</div>
+        <div class="product-name" data-i18n="p6.name">Space Capsule</div>
+        <div class="product-tags-row">
+          <span class="ptag" data-i18n="tag.aviation">Aviation Al</span>
+          <span class="ptag" data-i18n="tag.luxury">Luxury</span>
+        </div>
+        <div class="product-desc-hover" data-i18n="p6.desc">High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, full bathroom &amp; 24h hot water.</div>
+        <div class="product-thumbs">
+          <img src="images/products/capsule_1.jpeg" onclick="event.stopPropagation();openLb(capsuleGal,0)" alt="" />
+          <img src="images/products/capsule_2.jpeg" onclick="event.stopPropagation();openLb(capsuleGal,1)" alt="" />
+          <img src="images/products/capsule_3.jpeg" onclick="event.stopPropagation();openLb(capsuleGal,2)" alt="" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Feature Strip ── -->
+<div class="features-strip">
+  <div class="feature-item"><div class="feature-icon">🌊</div><div class="feature-val" data-i18n="feat.1.val">Mag. 9</div><div class="feature-lbl" data-i18n="feat.1.lbl">Seismic Resistance</div></div>
+  <div class="feature-item"><div class="feature-icon">🌪️</div><div class="feature-val" data-i18n="feat.2.val">Level 17</div><div class="feature-lbl" data-i18n="feat.2.lbl">Wind / Typhoon Rating</div></div>
+  <div class="feature-item"><div class="feature-icon">🔥</div><div class="feature-val">A1 / B1</div><div class="feature-lbl" data-i18n="feat.3.lbl">Fire Resistance Rating</div></div>
+  <div class="feature-item"><div class="feature-icon">⏳</div><div class="feature-val" data-i18n="feat.4.val">70+ Years</div><div class="feature-lbl" data-i18n="feat.4.lbl">Structure Lifespan</div></div>
+</div>
+
+<!-- ── Applications ── -->
+<section id="applications">
+  <div class="container">
+    <div class="app-header">
+      <div>
+        <div class="label" data-i18n="app.label">Applications</div>
+        <h2 class="app-title" data-i18n="app.title">Where Our Spaces Shine</h2>
+      </div>
+    </div>
+  </div>
+  <div class="app-grid">
+    <div class="app-card"><img class="app-card-bg" src="images/products/apple_1.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">🏡</div><div class="app-name" data-i18n="a1">Homestay Hotel</div><div class="app-desc" data-i18n="a1d">Boutique &amp; glamping</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/container_2.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">☕</div><div class="app-name" data-i18n="a2">Restaurants &amp; Cafés</div><div class="app-desc" data-i18n="a2d">Unique dining experiences</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/silent_2.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">🏢</div><div class="app-name" data-i18n="a3">Office &amp; Commercial</div><div class="app-desc" data-i18n="a3d">Pop-up, sales centers</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/capsule_2.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">🏕️</div><div class="app-name" data-i18n="a4">Luxury Glamping</div><div class="app-desc" data-i18n="a4d">Eco-tourism &amp; outdoor</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/folding_2.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">🌆</div><div class="app-name" data-i18n="a5">Cultural Tourism</div><div class="app-desc" data-i18n="a5d">Landmarks &amp; attractions</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/container_4.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">🏘️</div><div class="app-name" data-i18n="a6">Village &amp; Residential</div><div class="app-desc" data-i18n="a6d">Housing &amp; elderly care</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/folding_4.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">🏥</div><div class="app-name" data-i18n="a7">Medical &amp; Emergency</div><div class="app-desc" data-i18n="a7d">Field hospitals &amp; shelters</div></div></div>
+    <div class="app-card"><img class="app-card-bg" src="images/products/capsule_4.jpeg" alt="" /><div class="app-card-info"><div class="app-icon">💆</div><div class="app-name" data-i18n="a8">Health &amp; Wellness</div><div class="app-desc" data-i18n="a8d">Spas &amp; retreat studios</div></div></div>
+  </div>
+</section>
+
+<!-- ── Certifications ── -->
+<section id="certifications">
+  <div class="container">
+    <div class="certs-wrap">
+      <div class="certs-left">
+        <div class="label" data-i18n="cert.label">Credentials</div>
+        <h2 class="big-title" data-i18n="cert.title">Certified.<br>Trusted.<br>Global.</h2>
+        <p data-i18n="cert.desc">Our international certifications and domestic honors reflect our unwavering commitment to quality, safety, and environmental responsibility.</p>
+        <a href="#contact" class="btn-outline" data-i18n="cert.cta">Download Brochure</a>
+      </div>
+      <div>
+        <div class="cert-badges">
+          <div class="cert-badge"><strong>EU CE</strong><span data-i18n="cb.eu">European Market</span></div>
+          <div class="cert-badge"><strong>UKCA</strong><span data-i18n="cb.uk">UK Market</span></div>
+          <div class="cert-badge"><strong>ISO 9001</strong><span data-i18n="cb.q">Quality Mgmt</span></div>
+          <div class="cert-badge"><strong>ISO 45001</strong><span data-i18n="cb.s">Safety Mgmt</span></div>
+          <div class="cert-badge"><strong>ISO 14001</strong><span data-i18n="cb.e">Environment</span></div>
+          <div class="cert-badge"><strong>XICANO™</strong><span data-i18n="cb.x">Int'l Brand</span></div>
+        </div>
+        <div style="margin-top:20px;">
+          <div class="honors-grid">
+            <div class="honor-item"><div class="honor-icon">🏅</div><h4 data-i18n="h1">Grade 3A Credit</h4><p data-i18n="h1d">Highest credit rating</p></div>
+            <div class="honor-item"><div class="honor-icon">🤝</div><h4 data-i18n="h2">Grade 3A Contract</h4><p data-i18n="h2d">Trusted enterprise</p></div>
+            <div class="honor-item"><div class="honor-icon">🛡️</div><h4 data-i18n="h3">Safety Certified</h4><p data-i18n="h3d">Security Management</p></div>
+            <div class="honor-item"><div class="honor-icon">📜</div><h4 data-i18n="h4">Multiple Patents</h4><p data-i18n="h4d">Product innovations</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Portfolio / Cases ── -->
+<section id="cases">
+  <div class="cases-header container">
+    <div>
+      <div class="label" data-i18n="cases.label">Portfolio</div>
+      <h2 class="cases-title" data-i18n="cases.title">Our Portfolio</h2>
+    </div>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card" onclick="openLb(appleGal,0)"><img src="images/products/apple_2.jpeg" alt="" /><div class="case-info"><div class="case-region">🇹🇼 Taiwan</div><div class="case-name" data-i18n="c1">Apple Cabin Office</div><div class="case-type" data-i18n="c1t">Commercial · Apple Cabin</div></div></div>
+    <div class="case-card" onclick="openLb(appleGal,1)"><img src="images/products/apple_3.jpeg" alt="" /><div class="case-info"><div class="case-region">🇺🇸 United States</div><div class="case-name" data-i18n="c2">Apple Cabin Living Room</div><div class="case-type" data-i18n="c2t">Residential · Apple Cabin</div></div></div>
+    <div class="case-card" onclick="openLb(containerGal,0)"><img src="images/products/container_1.jpeg" alt="" /><div class="case-info"><div class="case-region">🇨🇳 Jiaxing, China</div><div class="case-name" data-i18n="c3">Nanhu Coffee Station</div><div class="case-type" data-i18n="c3t">F&amp;B · Container</div></div></div>
+    <div class="case-card" onclick="openLb(capsuleGal,0)"><img src="images/products/capsule_1.jpeg" alt="" /><div class="case-info"><div class="case-region">🇦🇺 Australia</div><div class="case-name" data-i18n="c5">Spacecraft Hotel</div><div class="case-type" data-i18n="c5t">Luxury Stay · Space Capsule</div></div></div>
+    <div class="case-card" onclick="openLb(capsuleGal,1)"><img src="images/products/capsule_2.jpeg" alt="" /><div class="case-info"><div class="case-region">🇨🇳 Hangzhou, China</div><div class="case-name" data-i18n="c6">Tonglu Spacecraft Resort</div><div class="case-type" data-i18n="c6t">Tourism · Space Capsule</div></div></div>
+    <div class="case-card" onclick="openLb(foldingGal,0)"><img src="images/products/folding_1.jpeg" alt="" /><div class="case-info"><div class="case-region">🇭🇷 Croatia</div><div class="case-name" data-i18n="c7">Chain Hotel Project</div><div class="case-type" data-i18n="c7t">Hospitality · Folding Room</div></div></div>
+  </div>
+</section>
+
+<!-- ── Manufacturing ── -->
+<section id="manufacturing">
+  <div class="container">
+    <div class="mfg-wrap">
+      <div class="mfg-left">
+        <div class="label">Manufacturing</div>
+        <h2 class="mfg-title" data-i18n="mfg.title">World-Class Production Facility</h2>
+        <p class="mfg-desc" data-i18n="mfg.desc">Since 2008, we have operated a 19,421 m² metal structure manufacturing facility staffed by 210 skilled technicians and equipped with cutting-edge machinery.</p>
+        <div class="mfg-stats">
+          <div class="mfg-stat"><div class="mfg-stat-num">210</div><div class="mfg-stat-lbl" data-i18n="mfg.s1">Technical Workers</div></div>
+          <div class="mfg-stat"><div class="mfg-stat-num">5</div><div class="mfg-stat-lbl" data-i18n="mfg.s2">Top Designers</div></div>
+          <div class="mfg-stat"><div class="mfg-stat-num">25</div><div class="mfg-stat-lbl" data-i18n="mfg.s3">Senior Technicians</div></div>
+          <div class="mfg-stat"><div class="mfg-stat-num">500</div><div class="mfg-stat-lbl" data-i18n="mfg.s4">Units / Month</div></div>
+        </div>
+      </div>
+      <div class="mfg-right">
+        <div class="equip-row"><span class="equip-ico">⚡</span><span class="equip-nm" data-i18n="eq1">Large Laser Cutting Equipment</span></div>
+        <div class="equip-row"><span class="equip-ico">🔧</span><span class="equip-nm" data-i18n="eq2">Large Bending Machines</span></div>
+        <div class="equip-row"><span class="equip-ico">✂️</span><span class="equip-nm" data-i18n="eq3">Shearing Machines</span></div>
+        <div class="equip-row"><span class="equip-ico">🔩</span><span class="equip-nm" data-i18n="eq4">Coiling &amp; Stamping Equipment</span></div>
+        <div class="equip-row"><span class="equip-ico">🔥</span><span class="equip-nm" data-i18n="eq5">Plasma Welding Equipment</span></div>
+        <div class="equip-row"><span class="equip-ico">🖥️</span><span class="equip-nm" data-i18n="eq6">Professional Design Systems</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <div class="label" data-i18n="ct.label">Get In Touch</div>
+        <h2 class="big-title" data-i18n="ct.title">Start Your Project Today</h2>
+        <p data-i18n="ct.desc">Ready to explore modular space solutions? Contact our team for product inquiries, custom quotes, and international shipping.</p>
+        <div class="contact-items">
+          <div class="contact-row"><div class="contact-ico">👤</div><div><div class="contact-lbl" data-i18n="ct.person">Contact</div><div class="contact-val">Wesley Chen</div></div></div>
+          <div class="contact-row"><div class="contact-ico">📞</div><div><div class="contact-lbl" data-i18n="ct.phone">Phone / WhatsApp</div><div class="contact-val"><a href="tel:+886901077444">(+886) 0901-077-444</a></div></div></div>
+          <div class="contact-row"><div class="contact-ico">✉️</div><div><div class="contact-lbl">Email</div><div class="contact-val"><a href="mailto:Hungwen883123@gmail.com">Hungwen883123@gmail.com</a></div></div></div>
+          <div class="contact-row"><div class="contact-ico">🌍</div><div><div class="contact-lbl" data-i18n="ct.markets">Markets</div><div class="contact-val" data-i18n="ct.mval">Europe · Asia-Pacific · Africa · Americas</div></div></div>
+        </div>
+      </div>
+      <div>
+        <form class="form" onsubmit="handleSubmit(event)">
+          <input type="text"  data-i18n-ph="f.name"    placeholder="Your Name *" required />
+          <input type="email" data-i18n-ph="f.email"   placeholder="Email Address *" required />
+          <input type="text"  data-i18n-ph="f.company" placeholder="Company / Organization" />
+          <input type="text"  data-i18n-ph="f.product" placeholder="Product of Interest" />
+          <textarea           data-i18n-ph="f.msg"     placeholder="Tell us about your project..."></textarea>
+          <button type="submit" class="btn-outline" style="font-size:.82rem;" data-i18n="f.submit">Send Inquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-logo">鴻 · HUNG</div>
+  <div class="footer-center">
+    <div>EU CE · UKCA · ISO 9001 · ISO 45001 · ISO 14001 · Grade 3A</div>
+    <div style="margin-top:6px;" data-i18n="footer.copy">© 2026 Hungchi International Ltd. All rights reserved.</div>
+  </div>
+  <div class="footer-right" data-i18n="footer.loc">Est. 2026 · Taiwan</div>
+</footer>
+
+<script>
+/* ── i18n ── */
+const T = {
+  en: {
+    'nav.products':'Products','nav.about':'About Us','nav.certs':'Certifications','nav.cases':'Portfolio','nav.contact':'Contact Us',
+    'hero.eyebrow':'Hungchi International · Est. 2026 · Taiwan',
+    'hero.t1':'WE BUILD','hero.t2':'THE FUTURE','hero.t3':'OF SPACE',
+    'hero.sub':'Intelligent modular spaces — crafted for the world\'s most inspiring locations.',
+    'hero.cta':'Explore Products','hero.label':'Apple Cabin',
+    'stat.1':'Units / Month','stat.2':'m² Factory','stat.3':'Year Lifespan','stat.4':'Technicians',
+    'about.label':'About Us',
+    'about.headline':'We design intelligent spaces that balance innovation, functionality, and a visionary approach for tomorrow\'s living.',
+    'about.desc':'Hungchi International Ltd. specializes in the R&D, production and export of high-end integrated pods and modular houses — delivering one-stop smart space solutions for global clients across Europe, Asia-Pacific, Africa and the Americas.',
+    'about.col1.label':'What We Do','about.col1.text':'We design and manufacture modular structures, developing intelligent layouts, premium materials, and spatial solutions that support daily use and long-term comfort.',
+    'about.col2.label':'Our Approach','about.col2.text':'Our process is rooted in precision manufacturing, international certification, and collaborative service — from concept to global delivery.',
+    'prod.label':'Our Products','prod.title':'Our Portfolio','prod.cta':'Request a Quote',
+    'p1.name':'Apple Cabin','p1.desc':'Minimalist modular space with seamless splicing. Solar & wind powered, Low-E double glass.',
+    'p2.name':'Starship Cabin','p2.desc':'Futuristic capsule for stargazing. 270° panoramic windows, smart home. 1–2 day assembly.',
+    'p3.name':'Folding Room','p3.desc':'Double-wing folding house. Compact for transport, fast deployment. Earthquake resistant.',
+    'p4.name':'Container House','p4.desc':'Steel containers transformed into living and commercial spaces. Stackable configurations.',
+    'p5.name':'Silent Cabin','p5.desc':'Professional acoustic solution. 30–40 dB reduction. For 1–2 or 4–6 persons.',
+    'p6.name':'Space Capsule','p6.desc':'High-end travel accommodation. Aviation aluminum, smart locks, full bathroom.',
+    'tag.solar':'Solar','tag.eco':'Eco','tag.smart':'Smart Home','tag.panorama':'270° View','tag.quick':'1–2 Days',
+    'tag.portable':'Portable','tag.water':'Waterproof','tag.stack':'Stackable','tag.custom':'Custom',
+    'tag.db':'30–40 dB','tag.office':'Office','tag.aviation':'Aviation Al','tag.luxury':'Luxury',
+    'feat.1.val':'Mag. 9','feat.1.lbl':'Seismic Resistance','feat.2.val':'Level 17','feat.2.lbl':'Wind / Typhoon Rating',
+    'feat.3.lbl':'Fire Resistance Rating','feat.4.val':'70+ Years','feat.4.lbl':'Structure Lifespan',
+    'app.label':'Applications','app.title':'Where Our Spaces Shine',
+    'a1':'Homestay Hotel','a1d':'Boutique & glamping','a2':'Restaurants & Cafés','a2d':'Unique dining',
+    'a3':'Office & Commercial','a3d':'Pop-up, sales centers','a4':'Luxury Glamping','a4d':'Eco-tourism',
+    'a5':'Cultural Tourism','a5d':'Landmarks & attractions','a6':'Village & Residential','a6d':'Housing & elderly care',
+    'a7':'Medical & Emergency','a7d':'Field hospitals','a8':'Health & Wellness','a8d':'Spas & retreats',
+    'cert.label':'Credentials','cert.title':'Certified.\nTrusted.\nGlobal.','cert.desc':'Our international certifications reflect our commitment to quality, safety, and environmental responsibility.',
+    'cert.cta':'Download Brochure',
+    'cb.eu':'European Market','cb.uk':'UK Market','cb.q':'Quality Mgmt','cb.s':'Safety Mgmt','cb.e':'Environment','cb.x':'Int\'l Brand',
+    'h1':'Grade 3A Credit','h1d':'Highest credit rating','h2':'Grade 3A Contract','h2d':'Trusted enterprise','h3':'Safety Certified','h3d':'Security Management','h4':'Multiple Patents','h4d':'Product innovations',
+    'cases.label':'Portfolio','cases.title':'Our Portfolio',
+    'c1':'Apple Cabin Office','c1t':'Commercial · Apple Cabin','c2':'Apple Cabin Living Room','c2t':'Residential · Apple Cabin',
+    'c3':'Nanhu Coffee Station','c3t':'F&B · Container','c5':'Spacecraft Hotel','c5t':'Luxury Stay · Space Capsule',
+    'c6':'Tonglu Spacecraft Resort','c6t':'Tourism · Space Capsule','c7':'Chain Hotel Project','c7t':'Hospitality · Folding Room',
+    'mfg.title':'World-Class Production Facility','mfg.desc':'Since 2008, we have operated a 19,421 m² metal structure manufacturing facility staffed by 210 skilled technicians.',
+    'mfg.s1':'Technical Workers','mfg.s2':'Top Designers','mfg.s3':'Senior Technicians','mfg.s4':'Units / Month',
+    'eq1':'Large Laser Cutting Equipment','eq2':'Large Bending Machines','eq3':'Shearing Machines',
+    'eq4':'Coiling & Stamping Equipment','eq5':'Plasma Welding Equipment','eq6':'Professional Design Systems',
+    'ct.label':'Get In Touch','ct.title':'Start Your Project Today','ct.desc':'Ready to explore modular space solutions? Contact our team for product inquiries, custom quotes, and international shipping.',
+    'ct.person':'Contact','ct.phone':'Phone / WhatsApp','ct.markets':'Markets','ct.mval':'Europe · Asia-Pacific · Africa · Americas',
+    'f.name':'Your Name *','f.email':'Email Address *','f.company':'Company / Organization','f.product':'Product of Interest','f.msg':'Tell us about your project...','f.submit':'Send Inquiry →',
+    'footer.copy':'© 2026 Hungchi International Ltd. All rights reserved.','footer.loc':'Est. 2026 · Taiwan',
+  },
+  zh: {
+    'nav.products':'產品系列','nav.about':'關於我們','nav.certs':'認證榮譽','nav.cases':'工程案例','nav.contact':'聯絡我們',
+    'hero.eyebrow':'鴻記國際有限公司 · 成立於 2026 · 台灣',
+    'hero.t1':'打造未來','hero.t2':'智能空間','hero.t3':'解決方案',
+    'hero.sub':'智能模組化空間——為世界最美的地點而生。',
+    'hero.cta':'探索產品','hero.label':'蘋果艙',
+    'stat.1':'台／月產能','stat.2':'m² 生產基地','stat.3':'年主體壽命','stat.4':'名技術工人',
+    'about.label':'關於我們',
+    'about.headline':'我們設計兼具創新、功能與前瞻視野的智能空間，為未來的生活方式而生。',
+    'about.desc':'鴻記國際有限公司專注於高端整合艙體與模組化房屋的研發、生產和出口，為歐洲、亞太、非洲及美洲的全球客戶提供一站式智能空間解決方案。',
+    'about.col1.label':'我們的業務','about.col1.text':'我們設計並製造模組化結構，開發智能佈局、優質材料和空間方案，支持日常使用和長期舒適。',
+    'about.col2.label':'我們的理念','about.col2.text':'我們的流程以精密製造、國際認證和協作服務為核心——從概念到全球交付。',
+    'prod.label':'產品系列','prod.title':'產品展示','prod.cta':'索取報價',
+    'p1.name':'蘋果艙','p1.desc':'極簡模組化移動空間，無縫拼接技術，太陽能+風能供電，雙層Low-E玻璃。',
+    'p2.name':'星艦艙','p2.desc':'未來感膠囊造型，270°全景窗，智能家居，1–2天完成安裝。',
+    'p3.name':'折疊房','p3.desc':'雙翼折疊式移動房屋，易於運輸，快速展開，抗震防風。',
+    'p4.name':'貨櫃屋','p4.desc':'鋼結構貨櫃改造的生活與商業空間，可疊放多種組合。',
+    'p5.name':'靜音艙','p5.desc':'專業隔音方案，降噪30–40dB，1–2人或4–6人規格。',
+    'p6.name':'太空膠囊','p6.desc':'高端旅宿產品，航空鋁材外殼，智能門鎖，完整衛浴設施。',
+    'tag.solar':'太陽能','tag.eco':'環保','tag.smart':'智能家居','tag.panorama':'270°全景','tag.quick':'1–2天安裝',
+    'tag.portable':'易運輸','tag.water':'防水','tag.stack':'可疊放','tag.custom':'客製化',
+    'tag.db':'降噪30–40dB','tag.office':'辦公適用','tag.aviation':'航空鋁材','tag.luxury':'豪華住宿',
+    'feat.1.val':'9 級','feat.1.lbl':'抗震等級','feat.2.val':'17 級','feat.2.lbl':'抗風颱風等級',
+    'feat.3.lbl':'防火安全等級','feat.4.val':'70+ 年','feat.4.lbl':'主體結構壽命',
+    'app.label':'應用場景','app.title':'我們的空間，無處不在',
+    'a1':'民宿酒店','a1d':'精品住宿與豪華露營','a2':'餐廳咖啡廳','a2d':'獨特餐飲空間',
+    'a3':'辦公商業','a3d':'快閃店、銷售中心','a4':'豪華露營','a4d':'生態旅遊戶外',
+    'a5':'文化旅遊小鎮','a5d':'地標裝置與景點','a6':'村落住宅','a6d':'住房與長者照護',
+    'a7':'醫療緊急','a7d':'野戰醫院與庇護所','a8':'健康養生','a8d':'SPA與療癒中心',
+    'cert.label':'資質認證','cert.title':'認證\n信賴\n全球','cert.desc':'我們的國際認證充分體現了對品質、安全與環保責任的堅定承諾。',
+    'cert.cta':'下載公司簡介',
+    'cb.eu':'歐洲市場','cb.uk':'英國市場','cb.q':'品質管理','cb.s':'安全管理','cb.e':'環境管理','cb.x':'國際品牌',
+    'h1':'3A 信用評級','h1d':'最高企業信用','h2':'3A 守合同','h2d':'守合同重信用企業','h3':'安全管理認證','h3d':'安全生產標準化','h4':'多項發明專利','h4d':'產品創新專利',
+    'cases.label':'工程案例','cases.title':'經典案例',
+    'c1':'蘋果艙辦公室','c1t':'商業辦公 · 蘋果艙','c2':'蘋果艙美式客廳','c2t':'住宅空間 · 蘋果艙',
+    'c3':'南湖咖啡站','c3t':'餐飲商業 · 貨櫃屋','c5':'澳洲太空艙民宿','c5t':'豪華住宿 · 太空膠囊',
+    'c6':'桐廬太空艙度假村','c6t':'旅遊露營 · 太空膠囊','c7':'連鎖酒店項目','c7t':'酒店配套 · 折疊房',
+    'mfg.title':'世界級生產基地','mfg.desc':'自2008年起，我們建立了佔地19,421m²的金屬結構製造工廠，配備210名技術工人。',
+    'mfg.s1':'技術工人','mfg.s2':'頂尖設計師','mfg.s3':'高級技術員','mfg.s4':'台／月產能',
+    'eq1':'大型雷射切割設備','eq2':'大型折彎機','eq3':'剪板機',
+    'eq4':'捲板機與衝壓設備','eq5':'等離子焊接設備','eq6':'專業圖形設計系統',
+    'ct.label':'聯絡我們','ct.title':'立即開啟您的項目','ct.desc':'準備好探索模組化空間解決方案了嗎？聯繫我們取得諮詢、報價與國際運輸安排。',
+    'ct.person':'聯絡人','ct.phone':'電話 / WhatsApp','ct.markets':'出口市場','ct.mval':'歐洲 · 亞太 · 非洲 · 美洲',
+    'f.name':'您的姓名 *','f.email':'電子郵件 *','f.company':'公司 / 機構','f.product':'感興趣的產品','f.msg':'請描述您的項目需求...','f.submit':'送出詢問 →',
+    'footer.copy':'© 2026 鴻記國際有限公司 版權所有','footer.loc':'成立於 2026 · 台灣',
+  }
+};
+
+let lang = localStorage.getItem('lang') || 'en';
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l === 'zh' ? 'zh-TW' : 'en';
+  document.title = l === 'zh' ? '鴻記國際有限公司' : 'Hungchi International Ltd.';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[l][el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const v = T[l][el.dataset.i18nPh];
+    if (v !== undefined) el.placeholder = v;
+  });
+  document.getElementById('btn-zh').classList.toggle('active', l === 'zh');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  localStorage.setItem('lang', l);
+}
+
+setLang(lang);
+
+/* ── Hero Slideshow ── */
+const slides = document.querySelectorAll('.hero-slide');
+const dots   = document.querySelectorAll('.hero-dot');
+const slideLabels = {
+  en: ['Hero Building','Starship Cabin','Apple Cabin','Space Capsule','Container House'],
+  zh: ['星艦艙','星艦艙','蘋果艙','太空膠囊','貨櫃屋'],
+};
+let si = 0;
+function goSlide(n) {
+  slides[si].classList.remove('active');
+  dots[si].classList.remove('active');
+  si = n;
+  slides[si].classList.add('active');
+  dots[si].classList.add('active');
+  const lbl = document.getElementById('heroLabel');
+  if (lbl) lbl.textContent = (slideLabels[lang] || slideLabels.en)[si] || '';
+}
+setInterval(() => goSlide((si + 1) % slides.length), 5000);
+
+/* ── Lightbox ── */
+const appleGal    = ['images/products/apple_1.jpeg','images/products/apple_2.jpeg','images/products/apple_3.jpeg','images/products/apple_4.jpeg','images/products/apple_5.jpeg','images/products/apple_6.jpeg','images/products/apple_7.jpeg'];
+const starshipGal = ['images/products/starship_1.jpeg','images/products/starship_2.jpeg','images/products/starship_3.jpeg','images/products/starship_4.jpeg'];
+const foldingGal  = ['images/products/folding_1.jpeg','images/products/folding_2.jpeg','images/products/folding_3.jpeg','images/products/folding_4.jpeg','images/products/folding_5.jpeg','images/products/folding_6.jpeg'];
+const containerGal= ['images/products/container_1.jpeg','images/products/container_2.jpeg','images/products/container_3.jpeg','images/products/container_4.jpeg','images/products/container_5.jpeg','images/products/container_6.jpeg'];
+const silentGal   = ['images/products/silent_3.jpeg','images/products/silent_2.jpeg','images/products/silent_4.jpeg','images/products/silent_main.jpeg'];
+const capsuleGal  = ['images/products/capsule_1.jpeg','images/products/capsule_2.jpeg','images/products/capsule_3.jpeg','images/products/capsule_4.jpeg','images/products/capsule_5.jpeg'];
+
+let lbArr = [], lbIdx = 0;
+function openLb(arr, i) { lbArr = arr; lbIdx = i; showLb(); document.getElementById('lightbox').classList.add('open'); }
+function closeLb() { document.getElementById('lightbox').classList.remove('open'); }
+function lbMove(d) { lbIdx = (lbIdx + d + lbArr.length) % lbArr.length; showLb(); }
+function showLb() { document.getElementById('lbImg').src = lbArr[lbIdx]; document.getElementById('lbCount').textContent = (lbIdx+1)+' / '+lbArr.length; }
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLb(); });
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeLb(); if (e.key==='ArrowLeft') lbMove(-1); if (e.key==='ArrowRight') lbMove(1); });
+
+/* ── Mobile menu ── */
+function toggleMenu() {
+  const m = document.getElementById('mobile-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+
+/* ── Form ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = lang === 'zh' ? '已送出 ✓' : 'Sent ✓';
+  btn.style.background = '#2a5c3f'; btn.style.color = '#fff'; btn.disabled = true;
+}
+</script>
+</body>
+</html>
