@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --black: #0a0a0a; --white: #fafaf8; --gold: #c8a96e; --gold-light: #e8d5b0;
-  --gray: #888; --gray-light: #f2f0ec; --border: rgba(200,169,110,0.25);
+  --black: #1a1a1a; --white: #ffffff; --cream: #f4f1ec; --gold: #c8a96e; --gold-light: #e8d5b0;
+  --gray: #777; --gray-light: #f0ede8; --border: rgba(200,169,110,0.25);
   --ff-display: 'Cormorant Garamond', serif; --ff-body: 'DM Sans', sans-serif;
   --transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
@@ -20,44 +20,43 @@ body { font-family: var(--ff-body); background: var(--white); color: var(--black
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 a { text-decoration: none; color: inherit; }
 
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0.5rem 4rem;
-  background: rgba(10,10,10,0.85); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(200,169,110,0.15);
+  padding: 0 4rem; height: 72px;
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
-.nav-logo img { height: 54px; width: auto; object-fit: contain; display: block; }
+.nav-logo img { height: 48px; width: auto; object-fit: contain; display: block; }
 .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-.nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,248,0.7); transition: var(--transition); }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(26,26,26,0.6); transition: var(--transition); }
 .nav-links a:hover { color: var(--gold); }
-.nav-cta { background: var(--gold); color: var(--black) !important; padding: 0.55rem 1.4rem; font-weight: 500; letter-spacing: 0.08em; }
-.nav-cta:hover { background: var(--gold-light) !important; }
+.nav-cta { background: var(--gold); color: var(--white) !important; padding: 0.55rem 1.4rem; font-weight: 500; letter-spacing: 0.08em; }
+.nav-cta:hover { background: #b8945a !important; }
 .nav-right { display: flex; align-items: center; gap: 1rem; }
-.lang-toggle { display: flex; border: 1px solid rgba(200,169,110,0.4); }
-.lang-btn { padding: 0.3rem 0.75rem; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; border: none; cursor: pointer; color: rgba(250,250,248,0.5); font-family: var(--ff-body); font-weight: 500; transition: all .2s; }
-.lang-btn.active { background: var(--gold); color: var(--black); }
+.lang-toggle { display: flex; border: 1px solid rgba(0,0,0,0.18); }
+.lang-btn { padding: 0.3rem 0.75rem; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; border: none; cursor: pointer; color: rgba(26,26,26,0.45); font-family: var(--ff-body); font-weight: 500; transition: all .2s; }
+.lang-btn.active { background: var(--gold); color: var(--white); }
 
-#hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: flex-end; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; background: url('images/hero_apple_cabin.jpg') center/cover no-repeat; }
-.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.2) 100%); }
-.hero-content { position: relative; z-index: 1; padding: 5rem 4rem 6rem; max-width: 900px; }
-.hero-tag { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+/* HERO — split */
+#hero { display: grid; grid-template-columns: 55% 45%; min-height: 100vh; padding-top: 72px; }
+.hero-photo { position: relative; overflow: hidden; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-panel { background: var(--cream); display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem 5rem 5rem; }
+.hero-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.7rem; }
 .hero-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
-.hero-h1 { font-family: var(--ff-display); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 1rem; }
+.hero-h1 { font-family: var(--ff-display); font-size: clamp(2.4rem, 4vw, 4.2rem); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 1.5rem; }
 .hero-h1 em { font-style: italic; color: var(--gold); }
-.hero-sub { font-size: 1rem; color: rgba(250,250,248,0.65); line-height: 1.7; max-width: 500px; margin-bottom: 2.5rem; }
-.hero-sub strong { color: var(--gold); font-weight: 500; }
-.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--gold); color: var(--black); padding: 0.9rem 2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition); }
-.btn-primary:hover { background: var(--gold-light); }
-.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(250,250,248,0.4); color: var(--white); padding: 0.9rem 2rem; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition); }
+.hero-sub { font-size: 0.95rem; color: #555; line-height: 1.75; max-width: 420px; margin-bottom: 2.5rem; }
+.hero-sub strong { color: var(--black); }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--gold); color: var(--white); padding: 0.9rem 2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition); }
+.btn-primary:hover { background: #b8945a; }
+.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; border: 2px solid var(--black); color: var(--black); padding: 0.88rem 2rem; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition); }
 .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-.hero-stats { position: absolute; bottom: 6rem; right: 4rem; z-index: 1; display: flex; gap: 2.5rem; }
-.stat { text-align: right; }
-.stat-num { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; color: var(--gold); line-height: 1; }
-.stat-label { font-size: 0.68rem; letter-spacing: 0.15em; color: rgba(250,250,248,0.5); text-transform: uppercase; margin-top: 0.2rem; }
 
+/* SECTION base */
 section { padding: 6rem 4rem; }
 .section-tag { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
 .section-tag::before { content: ''; width: 1.5rem; height: 1px; background: var(--gold); }
@@ -65,149 +64,182 @@ section { padding: 6rem 4rem; }
 .section-title em { font-style: italic; color: var(--gold); }
 .section-sub { color: var(--gray); font-size: 0.95rem; line-height: 1.75; max-width: 540px; }
 
-#scene { background: var(--black); padding: 6rem 4rem; }
-#scene .section-title { color: var(--white); }
-#scene .section-sub { color: rgba(250,250,248,0.5); }
-.scene-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 260px 260px; gap: 1px; margin-top: 3.5rem; background: rgba(200,169,110,0.15); }
-.scene-card { position: relative; overflow: hidden; }
-.scene-card:first-child { grid-column: span 2; }
-.scene-card img { transition: transform 0.7s ease; }
-.scene-card:hover img { transform: scale(1.06); }
-.scene-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
-.scene-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
-.scene-name { font-family: var(--ff-display); font-size: 1.1rem; color: var(--white); font-weight: 400; }
-.scene-desc { font-size: 0.72rem; color: var(--gold-light); letter-spacing: 0.05em; margin-top: 0.2rem; }
+/* WHY CHOOSE US */
+#why { background: var(--cream); padding: 6rem 4rem; }
+.why-header { text-align: center; margin-bottom: 4rem; }
+.why-header .section-tag { justify-content: center; }
+.why-header .section-tag::before { display: none; }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(0,0,0,0.09); }
+.why-card { padding: 2.5rem 2rem; border-right: 1px solid rgba(0,0,0,0.09); background: var(--white); transition: var(--transition); }
+.why-card:last-child { border-right: none; }
+.why-card:hover { background: #fdf9f4; }
+.why-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+.why-title { font-family: var(--ff-display); font-size: 1.3rem; color: var(--gold); margin-bottom: 0.8rem; }
+.why-desc { font-size: 0.85rem; color: #555; line-height: 1.7; }
 
-.ph-banner { background: linear-gradient(135deg, #0a3d2e 0%, #0f5c42 100%); border: 1px solid rgba(200,169,110,0.3); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin: 0 4rem; }
+/* PH BANNER */
+.ph-banner { background: linear-gradient(135deg, #0a3d2e 0%, #0f5c42 100%); border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
 .ph-flag { font-size: 2rem; }
 .ph-text h3 { font-family: var(--ff-display); font-size: 1.5rem; color: var(--gold); margin-bottom: 0.4rem; }
 .ph-text p { color: rgba(250,250,248,0.75); font-size: 0.88rem; line-height: 1.6; }
 .ph-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: #00B900; color: white; padding: 0.9rem 1.8rem; font-size: 0.82rem; font-weight: 500; white-space: nowrap; transition: var(--transition); }
 .ph-cta:hover { background: #009900; }
 
-#products { padding: 6rem 4rem; }
-.products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
-.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
-.product-card { background: var(--white); cursor: pointer; transition: var(--transition); }
-.product-card:hover { background: var(--gray-light); }
-.product-img { height: 240px; overflow: hidden; position: relative; background: #1a1a1a; }
+/* SERVICES */
+#scene { background: var(--white); padding: 6rem 4rem; }
+.services-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+.services-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.service-photo { position: relative; height: 380px; overflow: hidden; }
+.service-photo img { transition: transform 0.7s ease; }
+.service-photo:hover img { transform: scale(1.06); }
+.service-photo-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem; background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 80%); }
+.service-photo-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+.service-photo-name { font-family: var(--ff-display); font-size: 1.25rem; color: white; font-weight: 400; }
+.service-photo-desc { font-size: 0.72rem; color: rgba(255,255,255,0.75); margin-top: 0.2rem; letter-spacing: 0.04em; }
+.services-secondary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 1rem; }
+.service-mini { position: relative; height: 180px; overflow: hidden; }
+.service-mini img { transition: transform 0.6s ease; }
+.service-mini:hover img { transform: scale(1.06); }
+.service-mini-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 0.8rem 0.8rem; background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 80%); }
+.service-mini-name { font-family: var(--ff-display); font-size: 0.95rem; color: white; }
+
+/* PRODUCTS */
+#products { background: var(--cream); padding: 6rem 4rem; }
+.products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.product-card { background: var(--white); cursor: pointer; transition: var(--transition); border: 1px solid rgba(0,0,0,0.07); }
+.product-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-3px); }
+.product-img { height: 240px; overflow: hidden; position: relative; background: #e8e4e0; }
 .product-img img { transition: transform 0.6s ease; }
 .product-card:hover .product-img img { transform: scale(1.05); }
-.product-num { position: absolute; top: 1rem; left: 1rem; font-family: var(--ff-display); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.2em; background: rgba(10,10,10,0.7); padding: 0.2rem 0.5rem; }
+.product-num { position: absolute; top: 1rem; left: 1rem; font-family: var(--ff-display); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.2em; background: rgba(255,255,255,0.88); padding: 0.2rem 0.5rem; }
 .product-info { padding: 1.5rem; }
-.product-name { font-family: var(--ff-display); font-size: 1.35rem; margin-bottom: 0.5rem; }
+.product-name { font-family: var(--ff-display); font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--black); }
 .product-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
 .tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--gold); color: var(--gold); padding: 0.2rem 0.6rem; }
 .product-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
 .product-for { font-size: 0.75rem; color: var(--gold); margin-top: 0.7rem; font-style: italic; }
 
-.modal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,10,10,0.95); align-items: center; justify-content: center; }
+/* MODAL */
+.modal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,10,10,0.92); align-items: center; justify-content: center; }
 .modal.open { display: flex; }
-.modal-inner { position: relative; width: 90vw; max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--black); border: 1px solid var(--border); }
-.modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 10; background: var(--gold); color: var(--black); border: none; width: 2.5rem; height: 2.5rem; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.modal-inner { position: relative; width: 90vw; max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--white); border: 1px solid rgba(0,0,0,0.1); }
+.modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 10; background: var(--gold); color: var(--white); border: none; width: 2.5rem; height: 2.5rem; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .modal-main-img { height: 420px; }
-.modal-thumbs { display: flex; gap: 4px; padding: 4px; background: #111; }
-.modal-thumb { width: 80px; height: 60px; cursor: pointer; opacity: 0.6; flex-shrink: 0; transition: var(--transition); }
+.modal-thumbs { display: flex; gap: 4px; padding: 4px; background: #f0ede8; }
+.modal-thumb { width: 80px; height: 60px; cursor: pointer; opacity: 0.55; flex-shrink: 0; transition: var(--transition); }
 .modal-thumb:hover, .modal-thumb.active { opacity: 1; outline: 2px solid var(--gold); }
-.modal-desc { padding: 2rem; color: rgba(250,250,248,0.8); }
-.modal-desc h2 { font-family: var(--ff-display); font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; }
-.modal-desc p { font-size: 0.88rem; line-height: 1.75; }
+.modal-desc { padding: 2rem; }
+.modal-desc h2 { font-family: var(--ff-display); font-size: 2rem; color: var(--black); margin-bottom: 0.5rem; }
+.modal-desc p { font-size: 0.88rem; line-height: 1.75; color: #555; }
 
-#portfolio { background: var(--gray-light); padding: 6rem 4rem; }
+/* PORTFOLIO */
+#portfolio { background: var(--white); padding: 6rem 4rem; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-.portfolio-card { background: var(--white); overflow: hidden; }
+.portfolio-card { background: var(--cream); overflow: hidden; border: 1px solid rgba(0,0,0,0.07); transition: var(--transition); }
+.portfolio-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
 .portfolio-img { height: 200px; overflow: hidden; }
 .portfolio-img img { transition: transform 0.6s ease; }
 .portfolio-card:hover .portfolio-img img { transform: scale(1.07); }
 .portfolio-meta { padding: 1.2rem; }
 .portfolio-flag { font-size: 1.1rem; margin-bottom: 0.3rem; }
 .portfolio-location { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
-.portfolio-title { font-family: var(--ff-display); font-size: 1.1rem; margin: 0.3rem 0; }
+.portfolio-title { font-family: var(--ff-display); font-size: 1.1rem; margin: 0.3rem 0; color: var(--black); }
 .portfolio-type { font-size: 0.75rem; color: var(--gray); }
 
-#trust { background: var(--black); padding: 5rem 4rem; }
-.specs-row { display: flex; justify-content: center; gap: 0; border: 1px solid var(--border); margin-bottom: 3rem; }
-.spec { flex: 1; text-align: center; padding: 2rem 1.5rem; border-right: 1px solid var(--border); }
-.spec:last-child { border-right: none; }
+/* TRUST */
+#trust { background: var(--cream); padding: 6rem 4rem; }
+.trust-header { text-align: center; margin-bottom: 4rem; }
+.trust-header .section-tag { justify-content: center; }
+.trust-header .section-tag::before { display: none; }
+.specs-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
+.spec { text-align: center; background: var(--white); padding: 2rem 1rem; border: 1px solid rgba(0,0,0,0.07); }
 .spec-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
 .spec-val { font-family: var(--ff-display); font-size: 1.8rem; color: var(--gold); font-weight: 300; }
-.spec-label { font-size: 0.68rem; letter-spacing: 0.15em; color: rgba(250,250,248,0.4); text-transform: uppercase; margin-top: 0.3rem; }
-.certs-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--border); }
-.cert-item { background: #111; text-align: center; padding: 1.5rem 1rem; }
-.cert-name { font-family: var(--ff-display); font-size: 1.1rem; color: var(--gold); }
-.cert-sub { font-size: 0.65rem; color: rgba(250,250,248,0.4); margin-top: 0.3rem; letter-spacing: 0.08em; }
+.spec-label { font-size: 0.68rem; letter-spacing: 0.15em; color: var(--gray); text-transform: uppercase; margin-top: 0.3rem; }
+.certs-strip { background: var(--white); border: 1px solid rgba(0,0,0,0.08); display: flex; }
+.cert-item { flex: 1; text-align: center; padding: 2.2rem 1rem; border-right: 1px solid rgba(0,0,0,0.08); }
+.cert-item:last-child { border-right: none; }
+.cert-name { font-family: var(--ff-display); font-size: 1.5rem; color: var(--black); font-weight: 400; }
+.cert-sub { font-size: 0.65rem; color: var(--gray); margin-top: 0.4rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
+/* ABOUT */
 #about { padding: 0; }
 .about-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
-.about-text { padding: 6rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+.about-text { padding: 6rem 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--white); }
 .about-text p { font-size: 0.92rem; line-height: 1.85; color: #444; margin-bottom: 1rem; }
 .about-text strong { color: var(--black); }
 .about-text .gold-line { width: 3rem; height: 2px; background: var(--gold); margin: 1.5rem 0; }
-.about-img { position: relative; min-height: 400px; }
+.about-img { position: relative; min-height: 400px; overflow: hidden; }
 .delivery-strip { background: var(--black); padding: 4rem; }
 .delivery-numbers { display: flex; justify-content: space-around; gap: 2rem; flex-wrap: wrap; }
 .delivery-num { text-align: center; }
 .delivery-num-val { font-family: var(--ff-display); font-size: 2.5rem; color: var(--gold); font-weight: 300; }
-.delivery-num-label { font-size: 0.7rem; color: rgba(250,250,248,0.4); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.3rem; }
+.delivery-num-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.3rem; }
 
-#contact { padding: 6rem 4rem; background: var(--black); }
-#contact .section-title { color: var(--white); }
-#contact .section-sub { color: rgba(250,250,248,0.5); }
-.contact-layout { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-top: 3.5rem; max-width: 600px; }
+/* CONTACT */
+#contact { background: var(--black); padding: 7rem 4rem; }
+.contact-headline { font-family: var(--ff-display); font-size: clamp(2.4rem, 5vw, 4.5rem); color: var(--white); font-weight: 300; line-height: 1.1; margin-bottom: 3.5rem; max-width: 750px; }
+.contact-headline em { font-style: italic; color: var(--gold); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 900px; }
 .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 2rem; }
 .contact-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
 .contact-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.3rem; }
-.contact-val { color: rgba(250,250,248,0.85); font-size: 0.92rem; }
-.contact-val a { color: rgba(250,250,248,0.85); transition: var(--transition); }
+.contact-val { color: rgba(255,255,255,0.8); font-size: 0.92rem; }
+.contact-val a { color: rgba(255,255,255,0.8); transition: var(--transition); }
 .contact-val a:hover { color: var(--gold); }
-.contact-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+.contact-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
 .btn-wa { display: inline-flex; align-items: center; gap: 0.7rem; background: #25D366; color: white; padding: 1rem 1.8rem; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
 .btn-wa:hover { background: #128C7E; }
 .btn-line { display: inline-flex; align-items: center; gap: 0.7rem; background: #00B900; color: white; padding: 1rem 1.8rem; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
 .btn-line:hover { background: #009900; }
-.form-row { margin-bottom: 1rem; }
-.form-row input, .form-row select, .form-row textarea { width: 100%; background: #111; border: 1px solid rgba(200,169,110,0.2); color: var(--white); padding: 0.9rem 1rem; font-family: var(--ff-body); font-size: 0.85rem; outline: none; transition: var(--transition); }
-.form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--gold); }
-.form-row textarea { height: 100px; resize: none; }
-.form-row select option { background: #111; }
-.form-submit { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 1rem; font-family: var(--ff-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
-.form-submit:hover { background: var(--gold-light); }
 
-footer { background: var(--black); border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+/* FOOTER */
+footer { background: #111; border-top: 1px solid rgba(200,169,110,0.15); padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .footer-logo img { height: 40px; width: auto; object-fit: contain; display: block; }
-.footer-certs { font-size: 0.65rem; color: rgba(250,250,248,0.3); letter-spacing: 0.1em; }
-.footer-copy { font-size: 0.7rem; color: rgba(250,250,248,0.3); }
+.footer-certs { font-size: 0.65rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
+.footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.25); }
+
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-track { background: var(--cream); }
 ::-webkit-scrollbar-thumb { background: var(--gold); }
 
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-card { border-bottom: 1px solid rgba(0,0,0,0.09); }
+}
 @media (max-width: 900px) {
-  nav { padding: 0.5rem 1.5rem; }
+  nav { padding: 0 1.5rem; }
   .nav-links { display: none; }
-  section { padding: 4rem 1.5rem; }
-  #scene { padding: 4rem 1.5rem; }
-  .hero-content { padding: 0 1.5rem 4rem; }
-  .hero-stats { display: none; }
-  .scene-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .scene-card { height: 220px; }
-  .scene-card:first-child { grid-column: span 2; }
-  .product-grid { grid-template-columns: 1fr 1fr; }
+  section, #scene, #products, #portfolio, #trust, #why, #contact { padding: 4rem 1.5rem; }
+  .ph-banner { padding: 2rem 1.5rem; }
+  .delivery-strip { padding: 3rem 1.5rem; }
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-photo { height: 55vw; min-height: 260px; }
+  .hero-panel { padding: 3rem 1.5rem; }
+  .services-photos { grid-template-columns: 1fr 1fr; }
+  .service-photo { height: 260px; }
+  .services-secondary { grid-template-columns: repeat(3, 1fr); }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .about-split { grid-template-columns: 1fr; }
   .about-img { display: none; }
-  .contact-layout { grid-template-columns: 1fr; }
-  .portfolio-grid { grid-template-columns: 1fr 1fr; }
-  .certs-grid { grid-template-columns: repeat(3, 1fr); }
-  .specs-row { flex-wrap: wrap; }
-  .ph-banner { margin: 0 1.5rem; }
-  .products-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .specs-row { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .certs-strip { flex-wrap: wrap; }
+  .cert-item { flex: none; width: 50%; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
   footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
 }
 @media (max-width: 600px) {
   .product-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: 1fr; }
-  .scene-grid { grid-template-columns: 1fr; }
-  .scene-card:first-child { grid-column: span 1; }
+  .why-grid { grid-template-columns: 1fr; }
+  .services-photos { grid-template-columns: 1fr; }
+  .services-secondary { grid-template-columns: repeat(2, 1fr); }
+  .specs-row { grid-template-columns: repeat(2, 1fr); }
 }
+
 .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
 </style>
@@ -217,10 +249,10 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <nav>
   <div class="nav-logo"><img src="images/logo.png" alt="Hungchi International"></div>
   <div class="nav-links">
-    <a href="#scene" data-i18n="nav.scene">Applications</a>
+    <a href="#why" data-i18n="nav.why">Why Us</a>
+    <a href="#scene" data-i18n="nav.scene">Services</a>
     <a href="#products" data-i18n="nav.products">Products</a>
     <a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a>
-    <a href="#trust" data-i18n="nav.trust">Certifications</a>
     <a href="#about" data-i18n="nav.about">About</a>
     <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact Us</a>
   </div>
@@ -232,9 +264,12 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 </nav>
 
+<!-- HERO: split layout -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content fade-in visible">
+  <div class="hero-photo">
+    <img src="images/hero_apple_cabin.jpg" alt="Hungchi International Modular Spaces">
+  </div>
+  <div class="hero-panel fade-in visible">
     <div class="hero-tag" data-i18n="hero.tag">Hungchi International · Taiwan</div>
     <h1 class="hero-h1" data-i18n="hero.h1">Premium Spaces,<br><em>Global Delivery</em></h1>
     <p class="hero-sub" data-i18n="hero.sub">Your trusted partner for modular spaces — <strong>sourced, customized, and delivered worldwide.</strong><br>We manage every step from consultation to deployment.</p>
@@ -245,22 +280,37 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 </section>
 
-<section id="scene">
-  <div class="section-tag" data-i18n="scene.tag">Applications</div>
-  <h2 class="section-title" style="color:var(--white)" data-i18n="scene.title">Where Our Spaces <em>Shine</em></h2>
-  <p class="section-sub" data-i18n="scene.sub">Whether you run a resort, restaurant, golf club or diving base — our modular structures are built for your vision.</p>
-  <div class="scene-grid fade-in">
-    <div class="scene-card"><img src="images/apple_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏡</div><div class="scene-name" data-i18n="scene.1.name">Homestay &amp; Boutique Hotel</div><div class="scene-desc" data-i18n="scene.1.desc">Glamping · Eco-resort · Villa stays</div></div></div>
-    <div class="scene-card"><img src="images/container_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">☕</div><div class="scene-name" data-i18n="scene.2.name">Restaurants &amp; Cafés</div><div class="scene-desc" data-i18n="scene.2.desc">Unique dining · Pop-up F&amp;B</div></div></div>
-    <div class="scene-card"><img src="images/starship_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏌️</div><div class="scene-name" data-i18n="scene.3.name">Golf Club VIP Lounge</div><div class="scene-desc" data-i18n="scene.3.desc">Clubhouse · Caddy stations · Viewing decks</div></div></div>
-    <div class="scene-card"><img src="images/capsule_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🤿</div><div class="scene-name" data-i18n="scene.4.name">Diving &amp; Beach Resort</div><div class="scene-desc" data-i18n="scene.4.desc">Coastal stays · Water activity bases</div></div></div>
-    <div class="scene-card"><img src="images/silent_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏢</div><div class="scene-name" data-i18n="scene.5.name">Office &amp; Commercial</div><div class="scene-desc" data-i18n="scene.5.desc">Sales centers · Co-working · Pop-up retail</div></div></div>
-    <div class="scene-card"><img src="images/folding_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏗️</div><div class="scene-name" data-i18n="scene.6.name">Construction &amp; Industrial</div><div class="scene-desc" data-i18n="scene.6.desc">Site offices · Temporary housing · Warehouses</div></div></div>
-    <div class="scene-card"><img src="images/triangle_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🌆</div><div class="scene-name" data-i18n="scene.7.name">Cultural Tourism</div><div class="scene-desc" data-i18n="scene.7.desc">Landmarks · Scenic attractions · Parks</div></div></div>
-    <div class="scene-card"><img src="images/capsule_5.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏕️</div><div class="scene-name" data-i18n="scene.8.name">Luxury Glamping</div><div class="scene-desc" data-i18n="scene.8.desc">Eco-tourism · Outdoor retreats · Safari stays</div></div></div>
+<!-- WHY CHOOSE US: 4 columns -->
+<section id="why">
+  <div class="why-header fade-in">
+    <div class="section-tag" data-i18n="why.tag">Why Choose Us</div>
+    <h2 class="section-title" data-i18n="why.title">Four Reasons to <em>Partner with Hungchi</em></h2>
+  </div>
+  <div class="why-grid fade-in">
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <div class="why-title" data-i18n="why.1.title">Global Reach</div>
+      <div class="why-desc" data-i18n="why.1.desc">Delivered to 20+ countries across Asia-Pacific, Europe, Africa, and the Americas — with full logistics and project support from start to finish.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🏅</div>
+      <div class="why-title" data-i18n="why.2.title">Certified Quality</div>
+      <div class="why-desc" data-i18n="why.2.desc">EU CE, UKCA, ISO 9001, ISO 45001, ISO 14001 certified. Seismic Mag. 9 · Typhoon Level 17 · 70-year structure lifespan.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎨</div>
+      <div class="why-title" data-i18n="why.3.title">Full Customization</div>
+      <div class="why-desc" data-i18n="why.3.desc">Every detail — size, finish, smart home systems — configured to your vision. We coordinate end-to-end production with certified manufacturing partners.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <div class="why-title" data-i18n="why.4.title">24h Response</div>
+      <div class="why-desc" data-i18n="why.4.desc">Our team responds within 24 hours, every time. From first inquiry to post-delivery support — you always have a dedicated point of contact.</div>
+    </div>
   </div>
 </section>
 
+<!-- PHILIPPINES BANNER -->
 <div class="ph-banner fade-in">
   <div class="ph-flag">🇵🇭</div>
   <div class="ph-text">
@@ -270,6 +320,66 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   <a href="https://line.me/ti/p/Cfcb2TSRJg" class="ph-cta" target="_blank" data-i18n="ph.cta">💚 Talk to Wesley</a>
 </div>
 
+<!-- SERVICES: 3 large photos + 5 mini -->
+<section id="scene">
+  <div class="services-intro fade-in">
+    <div>
+      <div class="section-tag" data-i18n="scene.tag">Our Services</div>
+      <h2 class="section-title" data-i18n="scene.title">Where Our Spaces <em>Shine</em></h2>
+    </div>
+    <p class="section-sub" data-i18n="scene.sub">Whether you run a resort, restaurant, golf club or diving base — our modular structures are built for your vision.</p>
+  </div>
+  <div class="services-photos fade-in">
+    <div class="service-photo">
+      <img src="images/apple_main.jpg" alt="">
+      <div class="service-photo-label">
+        <div class="service-photo-icon">🏡</div>
+        <div class="service-photo-name" data-i18n="scene.1.name">Homestay &amp; Boutique Hotel</div>
+        <div class="service-photo-desc" data-i18n="scene.1.desc">Glamping · Eco-resort · Villa stays</div>
+      </div>
+    </div>
+    <div class="service-photo">
+      <img src="images/container_main.jpg" alt="">
+      <div class="service-photo-label">
+        <div class="service-photo-icon">☕</div>
+        <div class="service-photo-name" data-i18n="scene.2.name">Restaurants &amp; Cafés</div>
+        <div class="service-photo-desc" data-i18n="scene.2.desc">Unique dining · Pop-up F&amp;B</div>
+      </div>
+    </div>
+    <div class="service-photo">
+      <img src="images/starship_main.jpg" alt="">
+      <div class="service-photo-label">
+        <div class="service-photo-icon">🏌️</div>
+        <div class="service-photo-name" data-i18n="scene.3.name">Golf Club VIP Lounge</div>
+        <div class="service-photo-desc" data-i18n="scene.3.desc">Clubhouse · Caddy stations · Viewing decks</div>
+      </div>
+    </div>
+  </div>
+  <div class="services-secondary fade-in">
+    <div class="service-mini">
+      <img src="images/capsule_main.jpg" alt="">
+      <div class="service-mini-label"><div class="service-mini-name" data-i18n="scene.4.name">Diving &amp; Beach Resort</div></div>
+    </div>
+    <div class="service-mini">
+      <img src="images/silent_main.jpg" alt="">
+      <div class="service-mini-label"><div class="service-mini-name" data-i18n="scene.5.name">Office &amp; Commercial</div></div>
+    </div>
+    <div class="service-mini">
+      <img src="images/folding_main.jpg" alt="">
+      <div class="service-mini-label"><div class="service-mini-name" data-i18n="scene.6.name">Construction &amp; Industrial</div></div>
+    </div>
+    <div class="service-mini">
+      <img src="images/triangle_main.jpg" alt="">
+      <div class="service-mini-label"><div class="service-mini-name" data-i18n="scene.7.name">Cultural Tourism</div></div>
+    </div>
+    <div class="service-mini">
+      <img src="images/capsule_5.jpg" alt="">
+      <div class="service-mini-label"><div class="service-mini-name" data-i18n="scene.8.name">Luxury Glamping</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
 <section id="products">
   <div class="products-header fade-in">
     <div>
@@ -288,24 +398,25 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
       <div class="product-info"><div class="product-name">Starship Cabin</div><div class="product-tags"><span class="tag">270° View</span><span class="tag">1–2 Days Install</span></div><div class="product-desc" data-i18n="p.starship.desc">Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days.</div><div class="product-for" data-i18n="p.starship.for">✦ Ideal for: Glamping · Scenic Landmarks · Resorts</div></div>
     </div>
     <div class="product-card" onclick="openModal('folding')">
-      <div class="product-img"><img src="images/folding_main.jpg" alt=""><div class="product-num">03</div></div>
+      <div class="product-img"><img src="images/folding_main.jpg" alt="Folding Room"><div class="product-num">03</div></div>
       <div class="product-info"><div class="product-name" data-i18n="p.folding.name">Folding Room</div><div class="product-tags"><span class="tag">Portable</span><span class="tag">Waterproof</span><span class="tag">Fast Deploy</span></div><div class="product-desc" data-i18n="p.folding.desc">Double-wing folding house. Galvanized steel frame, compact for transport. Earthquake &amp; typhoon resistant — deploys in hours.</div><div class="product-for" data-i18n="p.folding.for">✦ Ideal for: Construction Sites · Temporary Offices · Events</div></div>
     </div>
     <div class="product-card" onclick="openModal('container')">
-      <div class="product-img"><img src="images/container_main.jpg" alt=""><div class="product-num">04</div></div>
+      <div class="product-img"><img src="images/container_main.jpg" alt="Container House"><div class="product-num">04</div></div>
       <div class="product-info"><div class="product-name" data-i18n="p.container.name">Container House</div><div class="product-tags"><span class="tag">Stackable</span><span class="tag">Custom</span><span class="tag">Industrial</span></div><div class="product-desc" data-i18n="p.container.desc">Repurposed steel containers transformed into living and commercial spaces. Stackable in infinite configurations for unique architectural forms.</div><div class="product-for" data-i18n="p.container.for">✦ Ideal for: Cafés · Retail · Hospitality · Offices</div></div>
     </div>
     <div class="product-card" onclick="openModal('silent')">
-      <div class="product-img"><img src="images/silent_main.jpg" alt=""><div class="product-num">05</div></div>
+      <div class="product-img"><img src="images/silent_main.jpg" alt="Silent Cabin"><div class="product-num">05</div></div>
       <div class="product-info"><div class="product-name" data-i18n="p.silent.name">Silent Cabin</div><div class="product-tags"><span class="tag">30–40 dB</span><span class="tag">Office Pod</span></div><div class="product-desc" data-i18n="p.silent.desc">Professional acoustic solution. High-density soundproofing, LED lighting, ventilation, USB &amp; Bluetooth. For 1–2 or 4–6 persons.</div><div class="product-for" data-i18n="p.silent.for">✦ Ideal for: Co-working Spaces · Offices · Hotels</div></div>
     </div>
     <div class="product-card" onclick="openModal('capsule')">
-      <div class="product-img"><img src="images/capsule_main.jpg" alt=""><div class="product-num">06</div></div>
+      <div class="product-img"><img src="images/capsule_main.jpg" alt="Space Capsule"><div class="product-num">06</div></div>
       <div class="product-info"><div class="product-name" data-i18n="p.capsule.name">Space Capsule</div><div class="product-tags"><span class="tag">Aviation Al</span><span class="tag">Luxury</span><span class="tag">Smart Lock</span></div><div class="product-desc" data-i18n="p.capsule.desc">High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, full bathroom &amp; 24h hot water.</div><div class="product-for" data-i18n="p.capsule.for">✦ Ideal for: Luxury Resorts · Beach Hotels · Glamping</div></div>
     </div>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section id="portfolio">
   <div class="section-tag" data-i18n="port.tag">Portfolio</div>
   <h2 class="section-title" data-i18n="port.title">Proven Projects, <em>Global Reach</em></h2>
@@ -320,10 +431,13 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 </section>
 
+<!-- TRUST / CERTS -->
 <section id="trust">
-  <div class="section-tag" style="color:var(--gold)" data-i18n="trust.tag">Why Trust Us</div>
-  <h2 class="section-title" style="color:var(--white)" data-i18n="trust.title">Built to <em>Last.</em></h2>
-  <p class="section-sub" style="color:rgba(250,250,248,0.5);margin-bottom:3rem" data-i18n="trust.sub">Every structure we deliver meets international standards for safety, durability, and environmental responsibility.</p>
+  <div class="trust-header fade-in">
+    <div class="section-tag" data-i18n="trust.tag">Why Trust Us</div>
+    <h2 class="section-title" data-i18n="trust.title">Built to <em>Last.</em></h2>
+    <p class="section-sub" style="margin:0 auto;text-align:center" data-i18n="trust.sub">Every structure we deliver meets international standards for safety, durability, and environmental responsibility.</p>
+  </div>
   <div class="specs-row fade-in">
     <div class="spec"><div class="spec-icon">🌊</div><div class="spec-val">Mag. 9</div><div class="spec-label" data-i18n="spec.1">Seismic Resistance</div></div>
     <div class="spec"><div class="spec-icon">🌪️</div><div class="spec-val">Level 17</div><div class="spec-label" data-i18n="spec.2">Typhoon Rating</div></div>
@@ -331,7 +445,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
     <div class="spec"><div class="spec-icon">⏳</div><div class="spec-val">70+ Yrs</div><div class="spec-label" data-i18n="spec.4">Structure Lifespan</div></div>
     <div class="spec"><div class="spec-icon">🏭</div><div class="spec-val">500</div><div class="spec-label" data-i18n="spec.5">Units / Month</div></div>
   </div>
-  <div class="certs-grid fade-in">
+  <div class="certs-strip fade-in">
     <div class="cert-item"><div class="cert-name">EU CE</div><div class="cert-sub" data-i18n="cert.1">European Market</div></div>
     <div class="cert-item"><div class="cert-name">UKCA</div><div class="cert-sub" data-i18n="cert.2">UK Market</div></div>
     <div class="cert-item"><div class="cert-name">ISO 9001</div><div class="cert-sub" data-i18n="cert.3">Quality Mgmt</div></div>
@@ -341,6 +455,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="about-split">
     <div class="about-text fade-in">
@@ -366,19 +481,18 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   </div>
 </section>
 
+<!-- CONTACT: dark, large headline -->
 <section id="contact">
-  <div class="section-tag" data-i18n="con.tag">Get In Touch</div>
-  <h2 class="section-title" style="color:var(--white)" data-i18n="con.title">Start Your <em>Project Today</em></h2>
-  <p class="section-sub" data-i18n="con.sub">Ready to explore modular space solutions? Contact Wesley directly — we respond within 24 hours.</p>
+  <h2 class="contact-headline fade-in" data-i18n="con.title">Let's Discuss Your<br><em>Next Project</em></h2>
   <div class="contact-layout fade-in">
     <div class="contact-info">
       <div class="contact-item"><div class="contact-icon">👤</div><div><div class="contact-label" data-i18n="con.l1">Contact</div><div class="contact-val" data-i18n="con.v1">Wesley Chen — International Sales</div></div></div>
       <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label" data-i18n="con.l2">Phone / WhatsApp</div><div class="contact-val"><a href="tel:+886901077444">(+886) 0901-077-444</a></div></div></div>
       <div class="contact-item"><div class="contact-icon">🌍</div><div><div class="contact-label" data-i18n="con.l4">Markets</div><div class="contact-val" data-i18n="con.v4">Europe · Asia-Pacific · Africa · Americas<br><strong style="color:var(--gold)">🇵🇭 Philippines — Now Open</strong></div></div></div>
-      <div class="contact-actions">
-        <a href="https://wa.me/886901077444?text=Hello%20Wesley%2C%20I%20am%20interested%20in%20Hungchi%20modular%20spaces." class="btn-wa" target="_blank" data-i18n="con.wa">💬 Chat on WhatsApp</a>
-        <a href="https://line.me/ti/p/Cfcb2TSRJg" class="btn-line" target="_blank" data-i18n="con.line">💚 Add on LINE</a>
-      </div>
+    </div>
+    <div class="contact-actions">
+      <a href="https://wa.me/886901077444?text=Hello%20Wesley%2C%20I%20am%20interested%20in%20Hungchi%20modular%20spaces." class="btn-wa" target="_blank" data-i18n="con.wa">💬 Chat on WhatsApp</a>
+      <a href="https://line.me/ti/p/Cfcb2TSRJg" class="btn-line" target="_blank" data-i18n="con.line">💚 Add on LINE</a>
     </div>
   </div>
 </section>
@@ -389,6 +503,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   <div class="footer-copy" data-i18n="footer.copy">© 2026 Hungchi International Ltd. · Taiwan</div>
 </footer>
 
+<!-- PRODUCT MODAL -->
 <div class="modal" id="productModal">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -401,25 +516,29 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
 <script>
 const T = {
   en: {
-    'nav.scene':'Applications','nav.products':'Products','nav.portfolio':'Portfolio','nav.trust':'Certifications','nav.about':'About','nav.contact':'Contact Us',
+    'nav.why':'Why Us','nav.scene':'Services','nav.products':'Products','nav.portfolio':'Portfolio','nav.trust':'Certifications','nav.about':'About','nav.contact':'Contact Us',
     'hero.tag':'Hungchi International · Taiwan',
     'hero.h1':'Premium Spaces,<br><em>Global Delivery</em>',
     'hero.sub':'Your trusted partner for modular spaces — <strong>sourced, customized, and delivered worldwide.</strong><br>We manage every step from consultation to deployment.',
     'hero.cta1':'Explore Products ↓','hero.cta2':'💚 LINE Us',
-    'stat.1':'Units / Month','stat.2':'Countries Served','stat.3':'Year Lifespan',
-    'scene.tag':'Applications','scene.title':'Where Our Spaces <em>Shine</em>',
+    'why.tag':'Why Choose Us','why.title':'Four Reasons to <em>Partner with Hungchi</em>',
+    'why.1.title':'Global Reach','why.1.desc':'Delivered to 20+ countries across Asia-Pacific, Europe, Africa, and the Americas — with full logistics and project support from start to finish.',
+    'why.2.title':'Certified Quality','why.2.desc':'EU CE, UKCA, ISO 9001, ISO 45001, ISO 14001 certified. Seismic Mag. 9 · Typhoon Level 17 · 70-year structure lifespan.',
+    'why.3.title':'Full Customization','why.3.desc':'Every detail — size, finish, smart home systems — configured to your vision. We coordinate end-to-end production with certified manufacturing partners.',
+    'why.4.title':'24h Response','why.4.desc':'Our team responds within 24 hours, every time. From first inquiry to post-delivery support — you always have a dedicated point of contact.',
+    'ph.title':'Now Entering the Philippine Market',
+    'ph.desc':'We are actively seeking our first Philippine partners across hospitality, F&amp;B, golf, diving, and commercial sectors.<br><strong style="color:var(--gold-light)">Early partners receive priority pricing and dedicated project support.</strong>',
+    'ph.cta':'💚 Talk to Wesley',
+    'scene.tag':'Our Services','scene.title':'Where Our Spaces <em>Shine</em>',
     'scene.sub':'Whether you run a resort, restaurant, golf club or diving base — our modular structures are built for your vision.',
     'scene.1.name':'Homestay &amp; Boutique Hotel','scene.1.desc':'Glamping · Eco-resort · Villa stays',
     'scene.2.name':'Restaurants &amp; Cafés','scene.2.desc':'Unique dining · Pop-up F&amp;B',
     'scene.3.name':'Golf Club VIP Lounge','scene.3.desc':'Clubhouse · Caddy stations · Viewing decks',
-    'scene.4.name':'Diving &amp; Beach Resort','scene.4.desc':'Coastal stays · Water activity bases',
-    'scene.5.name':'Office &amp; Commercial','scene.5.desc':'Sales centers · Co-working · Pop-up retail',
-    'scene.6.name':'Construction &amp; Industrial','scene.6.desc':'Site offices · Temporary housing · Warehouses',
-    'scene.7.name':'Cultural Tourism','scene.7.desc':'Landmarks · Scenic attractions · Parks',
-    'scene.8.name':'Luxury Glamping','scene.8.desc':'Eco-tourism · Outdoor retreats · Safari stays',
-    'ph.title':'Now Entering the Philippine Market',
-    'ph.desc':'We are actively seeking our first Philippine partners across hospitality, F&amp;B, golf, diving, and commercial sectors.<br><strong style="color:var(--gold-light)">Early partners receive priority pricing and dedicated project support.</strong>',
-    'ph.cta':'💚 Talk to Wesley',
+    'scene.4.name':'Diving &amp; Beach Resort',
+    'scene.5.name':'Office &amp; Commercial',
+    'scene.6.name':'Construction &amp; Industrial',
+    'scene.7.name':'Cultural Tourism',
+    'scene.8.name':'Luxury Glamping',
     'prod.tag':'Our Products','prod.title':'Six Signature <em>Space Solutions</em>','prod.quote':'Request a Quote →',
     'p.apple.desc':'Minimalist modular space with seamless splicing. Solar &amp; wind powered, Low-E double glass, available in aluminum, galvanized or bamboo finishes.',
     'p.apple.for':'✦ Ideal for: Resorts · Homestays · Golf Clubs',
@@ -455,45 +574,43 @@ const T = {
     'about.p3':'Our role is simple: <strong>we listen to your vision, coordinate every step of customization and production,</strong> and ensure your modular space arrives on time, on spec, and ready to deploy.',
     'about.p4':'From first inquiry through to delivery, our team provides <strong>dedicated, responsive support</strong> — so you can focus on your business, not the logistics.',
     'del.1':'Production Capacity','del.2':'Countries Delivered','del.3':'Product Lines','del.4':'Year Lifespan','del.5':'Response Time','del.6':'Project Support',
-    'con.tag':'Get In Touch','con.title':'Start Your <em>Project Today</em>',
-    'con.sub':'Ready to explore modular space solutions? Contact Wesley directly — we respond within 24 hours.',
+    'con.title':'Let\'s Discuss Your<br><em>Next Project</em>',
     'con.l1':'Contact','con.v1':'Wesley Chen — International Sales',
     'con.l2':'Phone / WhatsApp','con.l4':'Markets',
     'con.v4':'Europe · Asia-Pacific · Africa · Americas<br><strong style="color:var(--gold)">🇵🇭 Philippines — Now Open</strong>',
     'con.wa':'💬 Chat on WhatsApp','con.line':'💚 Add on LINE',
-    'form.industry':'Your Industry','form.product':'Product Interest','form.unsure':'Not Sure — Need Consultation',
-    'ind.1':'Hospitality / Resort / Homestay','ind.2':'Golf Club / Sports Facility','ind.3':'Diving / Beach / Water Sports',
-    'ind.4':'Restaurant / F&B','ind.5':'Construction / Real Estate','ind.6':'Manufacturing / Trade','ind.7':'Office / Commercial','ind.8':'Other',
     'footer.copy':'© 2026 Hungchi International Ltd. · Taiwan',
-    'submit.btn':'Send Inquiry →','submit.ok':'✓ Message Sent! Wesley will reply within 24 hours.',
     'modal.apple.desc':'Minimalist modular space with seamless splicing technology. Solar & wind powered, Low-E double glass, aluminum, galvanized or bamboo finishes. Seismic Mag. 9, Typhoon Level 17 resistant.',
     'modal.starship.desc':'Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days. Perfect for glamping and scenic landmarks.',
     'modal.folding.desc':'Double-wing folding house. Galvanized steel frame, fast deployment in hours. Earthquake & typhoon resistant. Ideal for construction sites, events, and temporary commercial use.',
     'modal.container.desc':'Steel containers transformed into living and commercial spaces. Stackable in infinite configurations. High-strength steel structure with creative exterior personalization.',
     'modal.silent.desc':'Professional acoustic solution with 30–40 dB noise reduction. High-density soundproofing, LED lighting, USB, Bluetooth speaker, temperature control. For 1–2 or 4–6 persons.',
     'modal.capsule.desc':'High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, smart TV, full bathroom & 24h hot water. Futuristic design for luxury resort destinations.',
-    'f.phone':'Phone / WhatsApp *',
   },
   zh: {
-    'nav.scene':'應用場景','nav.products':'產品','nav.portfolio':'作品集','nav.trust':'認證','nav.about':'關於我們','nav.contact':'聯絡我們',
+    'nav.why':'為何選擇我們','nav.scene':'應用場景','nav.products':'產品','nav.portfolio':'作品集','nav.trust':'認證','nav.about':'關於我們','nav.contact':'聯絡我們',
     'hero.tag':'鴻記國際有限公司 · 台灣',
     'hero.h1':'頂級空間，<br><em>全球交付</em>',
     'hero.sub':'您可信賴的模組化空間夥伴 — <strong>客製採購，全球交付。</strong><br>從諮詢到安裝部署，全程由我們負責。',
     'hero.cta1':'探索產品 ↓','hero.cta2':'💚 LINE 聯絡我們',
-    'stat.1':'台 / 月','stat.2':'服務國家','stat.3':'年使用壽命',
+    'why.tag':'為何選擇我們','why.title':'選擇鴻記的 <em>四大理由</em>',
+    'why.1.title':'全球交付','why.1.desc':'已成功交付至亞太、歐洲、非洲及美洲共 20+ 個國家，提供全程物流與專案支援。',
+    'why.2.title':'認證品質','why.2.desc':'通過 EU CE、UKCA、ISO 9001、ISO 45001、ISO 14001 認證。抗震 9 級 · 抗颱 17 級 · 70 年結構壽命。',
+    'why.3.title':'完全客製','why.3.desc':'尺寸、外觀、智能家居系統——每個細節均依您的需求配置，全程協調認證製造夥伴完成生產。',
+    'why.4.title':'24 小時回覆','why.4.desc':'我們的團隊每次均在 24 小時內回覆。從第一次詢問到交貨後支援，始終有專屬聯絡人服務您。',
+    'ph.title':'菲律賓市場正式啟動',
+    'ph.desc':'我們正積極尋找菲律賓合作夥伴，涵蓋餐旅、餐飲、高爾夫、潛水及商業領域。<br><strong style="color:var(--gold-light)">優先合作夥伴享有專屬定價與全程專案支援。</strong>',
+    'ph.cta':'💚 聯絡 Wesley',
     'scene.tag':'應用場景','scene.title':'我們的空間 <em>無所不在</em>',
     'scene.sub':'無論您經營度假村、餐廳、高爾夫球場或潛水基地——我們的模組化建築為您的願景而生。',
     'scene.1.name':'民宿 &amp; 精品旅館','scene.1.desc':'露營度假 · 生態旅宿 · 別墅',
     'scene.2.name':'餐廳 &amp; 咖啡廳','scene.2.desc':'特色餐飲 · 快閃餐飲',
     'scene.3.name':'高爾夫 VIP 貴賓室','scene.3.desc':'會所 · 球僮站 · 觀景台',
-    'scene.4.name':'潛水 &amp; 海灘度假村','scene.4.desc':'海岸住宿 · 水上活動基地',
-    'scene.5.name':'辦公 &amp; 商業空間','scene.5.desc':'銷售中心 · 共享辦公 · 快閃零售',
-    'scene.6.name':'建築 &amp; 工業用途','scene.6.desc':'工地辦公室 · 臨時住所 · 倉庫',
-    'scene.7.name':'文化觀光','scene.7.desc':'地標 · 風景區 · 公園',
-    'scene.8.name':'奢華露營','scene.8.desc':'生態旅遊 · 戶外度假 · 叢林住宿',
-    'ph.title':'菲律賓市場正式啟動',
-    'ph.desc':'我們正積極尋找菲律賓合作夥伴，涵蓋餐旅、餐飲、高爾夫、潛水及商業領域。<br><strong style="color:var(--gold-light)">優先合作夥伴享有專屬定價與全程專案支援。</strong>',
-    'ph.cta':'💚 聯絡 Wesley',
+    'scene.4.name':'潛水 &amp; 海灘度假村',
+    'scene.5.name':'辦公 &amp; 商業空間',
+    'scene.6.name':'建築 &amp; 工業用途',
+    'scene.7.name':'文化觀光',
+    'scene.8.name':'奢華露營',
     'prod.tag':'我們的產品','prod.title':'六款招牌 <em>空間解決方案</em>','prod.quote':'索取報價 →',
     'p.apple.desc':'極簡模組化空間，支援無縫拼接。太陽能與風能供電，Low-E 雙層玻璃，鋁製、鍍鋅或竹材飾面可選。',
     'p.apple.for':'✦ 適合：度假村 · 民宿 · 高爾夫球場',
@@ -519,7 +636,7 @@ const T = {
     'case.4.loc':'澳洲','case.4.title':'太空船飯店','case.4.type':'奢華住宿 · 太空膠囊',
     'case.5.loc':'中國 杭州','case.5.title':'桐廬太空船度假村','case.5.type':'觀光 · 太空膠囊',
     'case.6.loc':'克羅埃西亞','case.6.title':'連鎖飯店專案','case.6.type':'餐旅 · 折疊屋',
-    'trust.tag':'為何選擇我們','trust.title':'品質持久，<em>值得信賴。</em>',
+    'trust.tag':'為何信任我們','trust.title':'品質持久，<em>值得信賴。</em>',
     'trust.sub':'我們交付的每一棟建築，均符合國際安全、耐久性與環保標準。',
     'spec.1':'抗震等級','spec.2':'抗颱等級','spec.3':'防火等級','spec.4':'結構壽命','spec.5':'產能 / 月',
     'cert.1':'歐洲市場','cert.2':'英國市場','cert.3':'品質管理','cert.4':'安全管理','cert.5':'環境管理','cert.6':'信用與合約',
@@ -529,24 +646,18 @@ const T = {
     'about.p3':'我們的工作很簡單：<strong>傾聽您的需求，協調客製化與生產的每一個環節，</strong>確保您的模組化空間準時、符合規格地送達並隨時可用。',
     'about.p4':'從第一次詢問到交貨，我們的團隊提供<strong>全程專屬、快速回應的服務</strong>——讓您專注於業務，無需操心物流。',
     'del.1':'月產能','del.2':'交付國家','del.3':'產品系列','del.4':'年使用壽命','del.5':'回覆時效','del.6':'全程服務',
-    'con.tag':'聯絡我們','con.title':'立即開始 <em>您的專案</em>',
-    'con.sub':'準備好探索模組化空間解決方案了嗎？直接聯絡 Wesley——我們在 24 小時內回覆。',
+    'con.title':'讓我們一起討論<br><em>您的下一個專案</em>',
     'con.l1':'聯絡人','con.v1':'Wesley Chen — 國際業務',
     'con.l2':'電話 / WhatsApp','con.l4':'服務市場',
     'con.v4':'歐洲 · 亞太 · 非洲 · 美洲<br><strong style="color:var(--gold)">🇵🇭 菲律賓 — 現已開放</strong>',
     'con.wa':'💬 WhatsApp 聯絡','con.line':'💚 加入 LINE',
-    'form.industry':'您的行業','form.product':'產品需求','form.unsure':'尚未確定 — 需要諮詢',
-    'ind.1':'餐旅 / 度假村 / 民宿','ind.2':'高爾夫 / 運動設施','ind.3':'潛水 / 海灘 / 水上運動',
-    'ind.4':'餐廳 / 餐飲','ind.5':'建設 / 房地產','ind.6':'製造 / 貿易','ind.7':'辦公 / 商業','ind.8':'其他',
     'footer.copy':'© 2026 鴻記國際有限公司 · 台灣',
-    'submit.btn':'送出詢問 →','submit.ok':'✓ 訊息已送出！Wesley 將在 24 小時內回覆。',
     'modal.apple.desc':'極簡模組化空間，支援無縫拼接技術。太陽能與風能供電，Low-E 雙層玻璃，鋁製、鍍鋅或竹材飾面。抗震 9 級，抗颱 17 級。',
     'modal.starship.desc':'未來感太空艙，270° 全景窗、鋁合金框架、智能家居系統，包含聲控燈光和窗簾。僅需 1–2 天組裝，適合豪華露營和地標景點。',
     'modal.folding.desc':'雙翼折疊式房屋，鍍鋅鋼框，便於運輸，數小時快速部署。抗震防颱，適合工地、活動及臨時商業用途。',
     'modal.container.desc':'鋼鐵貨櫃改造為生活與商業空間，可無限疊加——單層、多層、交錯排列。高強度鋼結構，外觀可個性化設計。',
     'modal.silent.desc':'專業隔音方案，降噪 30–40 dB。高密度隔音、LED 燈光、USB、藍牙音響、溫控。適合 1–2 人或 4–6 人使用。',
     'modal.capsule.desc':'高端旅宿體驗。航空鋁外殼、智能門鎖、頂級寢具、智能電視、乾濕分離衛浴及 24 小時熱水。未來感設計。',
-    'f.phone':'電話 / WhatsApp *',
   }
 };
 
@@ -562,15 +673,6 @@ function setLang(l) {
     const key = el.getAttribute('data-i18n');
     if (T[l][key] !== undefined) el.innerHTML = T[l][key];
   });
-  const ph = {
-    en: { name:'Your Name *', phone:'Phone / WhatsApp *', company:'Company / Project Name', msg:'Tell us about your project, location, and quantity requirements...' },
-    zh: { name:'您的姓名 *', phone:'電話 / WhatsApp *', company:'公司 / 專案名稱', msg:'請告訴我們您的專案內容、地點與數量需求...' }
-  }[l];
-  document.getElementById('f-name').placeholder = ph.name;
-  document.getElementById('f-phone').placeholder = ph.phone;
-  document.getElementById('f-company').placeholder = ph.company;
-  document.getElementById('f-msg').placeholder = ph.msg;
-  document.getElementById('form-submit-btn').textContent = T[l]['submit.btn'];
 }
 
 const observer = new IntersectionObserver(entries => {
@@ -603,16 +705,15 @@ function openModal(key) {
   const thumbs = document.getElementById('modalThumbs');
   thumbs.innerHTML = '';
   p.imgs.forEach((src, i) => {
-    const t = document.createElement('img');
-    t.src = src; t.className = 'modal-thumb'+(i===0?' active':'');
-    t.onclick = () => { mainImg.src = src; thumbs.querySelectorAll('.modal-thumb').forEach(el=>el.classList.remove('active')); t.classList.add('active'); };
-    thumbs.appendChild(t);
+    const th = document.createElement('img');
+    th.src = src; th.className = 'modal-thumb'+(i===0?' active':'');
+    th.onclick = () => { mainImg.src = src; thumbs.querySelectorAll('.modal-thumb').forEach(el=>el.classList.remove('active')); th.classList.add('active'); };
+    thumbs.appendChild(th);
   });
   document.getElementById('productModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeModal() { document.getElementById('productModal').classList.remove('open'); document.body.style.overflow = ''; }
-function handleSubmit() { alert(T[currentLang]['submit.ok']); }
 document.getElementById('productModal').addEventListener('click', function(e) { if (e.target===this) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
 setLang(currentLang);
