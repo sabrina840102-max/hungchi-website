@@ -8,255 +8,110 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ===== VARIABLES ===== */
 :root {
-  --black: #0a0a0a;
-  --white: #fafaf8;
-  --gold: #c8a96e;
-  --gold-light: #e8d5b0;
-  --gray: #888;
-  --gray-light: #f2f0ec;
-  --border: rgba(200,169,110,0.25);
-  --ff-display: 'Cormorant Garamond', serif;
-  --ff-body: 'DM Sans', sans-serif;
+  --black: #0a0a0a; --white: #fafaf8; --gold: #c8a96e; --gold-light: #e8d5b0;
+  --gray: #888; --gray-light: #f2f0ec; --border: rgba(200,169,110,0.25);
+  --ff-display: 'Cormorant Garamond', serif; --ff-body: 'DM Sans', sans-serif;
   --transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-
-/* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--ff-body); background: var(--white); color: var(--black); overflow-x: hidden; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 a { text-decoration: none; color: inherit; }
 
-/* ===== NAV ===== */
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.2rem 4rem;
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(12px);
+  padding: 0.5rem 4rem;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(200,169,110,0.15);
-  transition: var(--transition);
 }
-.nav-logo {
-  font-family: var(--ff-display);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-}
-.nav-logo span { color: var(--white); font-weight: 300; }
+.nav-logo img { height: 54px; width: auto; object-fit: contain; display: block; }
 .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-.nav-links a {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(250,250,248,0.7);
-  transition: var(--transition);
-}
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,248,0.7); transition: var(--transition); }
 .nav-links a:hover { color: var(--gold); }
-.nav-cta {
-  background: var(--gold);
-  color: var(--black) !important;
-  padding: 0.55rem 1.4rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  transition: var(--transition) !important;
-}
-.nav-cta:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+.nav-cta { background: var(--gold); color: var(--black) !important; padding: 0.55rem 1.4rem; font-weight: 500; letter-spacing: 0.08em; }
+.nav-cta:hover { background: var(--gold-light) !important; }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.lang-toggle { display: flex; border: 1px solid rgba(200,169,110,0.4); }
+.lang-btn { padding: 0.3rem 0.75rem; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; border: none; cursor: pointer; color: rgba(250,250,248,0.5); font-family: var(--ff-body); font-weight: 500; transition: all .2s; }
+.lang-btn.active { background: var(--gold); color: var(--black); }
 
-/* ===== HERO ===== */
-#hero {
-  position: relative; height: 100vh; min-height: 700px;
-  display: flex; align-items: flex-end;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background: url('images/hero_apple_cabin.jpg') center/cover no-repeat;
-}
-.hero-bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.2) 100%);
-}
-.hero-content {
-  position: relative; z-index: 1;
-  padding: 0 4rem 6rem;
-  max-width: 900px;
-}
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1.5rem;
-}
-.hero-tag::before {
-  content: ''; width: 2rem; height: 1px; background: var(--gold);
-}
-.hero-h1 {
-  font-family: var(--ff-display);
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  font-weight: 300;
-  color: var(--white);
-  line-height: 1.05;
-  margin-bottom: 1rem;
-}
+/* HERO */
+#hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: url('images/hero_apple_cabin.jpg') center/cover no-repeat; }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.2) 100%); }
+.hero-content { position: relative; z-index: 1; padding: 0 4rem 6rem; max-width: 900px; }
+.hero-tag { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.hero-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+.hero-h1 { font-family: var(--ff-display); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 1rem; }
 .hero-h1 em { font-style: italic; color: var(--gold); }
-.hero-sub {
-  font-size: 1rem; color: rgba(250,250,248,0.65);
-  line-height: 1.7; max-width: 480px;
-  margin-bottom: 2.5rem;
-}
+.hero-sub { font-size: 1rem; color: rgba(250,250,248,0.65); line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem; }
 .hero-sub strong { color: var(--gold); font-weight: 500; }
-.hero-actions { display: flex; gap: 1rem; align-items: center; }
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--gold); color: var(--black);
-  padding: 0.9rem 2rem; font-size: 0.82rem;
-  font-weight: 500; letter-spacing: 0.08em;
-  text-transform: uppercase; transition: var(--transition);
-}
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--gold); color: var(--black); padding: 0.9rem 2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition); }
 .btn-primary:hover { background: var(--gold-light); }
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  border: 1px solid rgba(250,250,248,0.4); color: var(--white);
-  padding: 0.9rem 2rem; font-size: 0.82rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  transition: var(--transition);
-}
+.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(250,250,248,0.4); color: var(--white); padding: 0.9rem 2rem; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition); }
 .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-.hero-stats {
-  position: absolute; bottom: 6rem; right: 4rem; z-index: 1;
-  display: flex; gap: 2.5rem;
-}
+.hero-stats { position: absolute; bottom: 6rem; right: 4rem; z-index: 1; display: flex; gap: 2.5rem; }
 .stat { text-align: right; }
-.stat-num {
-  font-family: var(--ff-display); font-size: 2rem;
-  font-weight: 300; color: var(--gold); line-height: 1;
-}
+.stat-num { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; color: var(--gold); line-height: 1; }
 .stat-label { font-size: 0.68rem; letter-spacing: 0.15em; color: rgba(250,250,248,0.5); text-transform: uppercase; margin-top: 0.2rem; }
 
-/* ===== SECTION COMMON ===== */
+/* SECTIONS */
 section { padding: 6rem 4rem; }
-.section-tag {
-  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.8rem;
-  display: flex; align-items: center; gap: 0.7rem;
-}
+.section-tag { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
 .section-tag::before { content: ''; width: 1.5rem; height: 1px; background: var(--gold); }
-.section-title {
-  font-family: var(--ff-display); font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 300; line-height: 1.15; margin-bottom: 1.2rem;
-}
+.section-title { font-family: var(--ff-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.2rem; }
 .section-title em { font-style: italic; color: var(--gold); }
 .section-sub { color: var(--gray); font-size: 0.95rem; line-height: 1.75; max-width: 540px; }
 
-/* ===== SCENE (Applications) ===== */
+/* SCENE */
 #scene { background: var(--black); padding: 6rem 4rem; }
 #scene .section-title { color: var(--white); }
 #scene .section-sub { color: rgba(250,250,248,0.5); }
-.scene-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 260px 260px;
-  gap: 1px;
-  margin-top: 3.5rem;
-  background: rgba(200,169,110,0.15);
-}
-.scene-card {
-  position: relative; overflow: hidden;
-  cursor: default;
-}
+.scene-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 260px 260px; gap: 1px; margin-top: 3.5rem; background: rgba(200,169,110,0.15); }
+.scene-card { position: relative; overflow: hidden; }
 .scene-card:first-child { grid-column: span 2; }
-.scene-card img {
-  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-}
+.scene-card img { transition: transform 0.7s ease; }
 .scene-card:hover img { transform: scale(1.06); }
-.scene-card-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 60%);
-  display: flex; flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem;
-}
+.scene-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
 .scene-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
 .scene-name { font-family: var(--ff-display); font-size: 1.1rem; color: var(--white); font-weight: 400; }
 .scene-desc { font-size: 0.72rem; color: var(--gold-light); letter-spacing: 0.05em; margin-top: 0.2rem; }
 
-/* Philippines Banner */
-.ph-banner {
-  background: linear-gradient(135deg, #0a3d2e 0%, #0f5c42 100%);
-  border: 1px solid rgba(200,169,110,0.3);
-  padding: 2.5rem 3rem;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 2rem; flex-wrap: wrap;
-  margin: 0 4rem;
-}
+/* PH BANNER */
+.ph-banner { background: linear-gradient(135deg, #0a3d2e 0%, #0f5c42 100%); border: 1px solid rgba(200,169,110,0.3); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin: 0 4rem; }
 .ph-flag { font-size: 2rem; }
 .ph-text h3 { font-family: var(--ff-display); font-size: 1.5rem; color: var(--gold); margin-bottom: 0.4rem; }
 .ph-text p { color: rgba(250,250,248,0.75); font-size: 0.88rem; line-height: 1.6; }
-.ph-cta {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  background: #25D366; color: white;
-  padding: 0.9rem 1.8rem; font-size: 0.82rem;
-  font-weight: 500; white-space: nowrap;
-  transition: var(--transition);
-}
-.ph-cta:hover { background: #128C7E; }
+.ph-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: #00B900; color: white; padding: 0.9rem 1.8rem; font-size: 0.82rem; font-weight: 500; white-space: nowrap; transition: var(--transition); }
+.ph-cta:hover { background: #009900; }
 
-/* ===== PRODUCTS ===== */
+/* PRODUCTS */
 #products { padding: 6rem 4rem; }
 .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
 .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
-.product-card {
-  background: var(--white);
-  cursor: pointer;
-  transition: var(--transition);
-}
+.product-card { background: var(--white); cursor: pointer; transition: var(--transition); }
 .product-card:hover { background: var(--gray-light); }
-.product-img {
-  height: 240px; overflow: hidden; position: relative;
-  background: #1a1a1a;
-}
+.product-img { height: 240px; overflow: hidden; position: relative; background: #1a1a1a; }
 .product-img img { transition: transform 0.6s ease; }
 .product-card:hover .product-img img { transform: scale(1.05); }
-.product-num {
-  position: absolute; top: 1rem; left: 1rem;
-  font-family: var(--ff-display); font-size: 0.75rem;
-  color: var(--gold); letter-spacing: 0.2em;
-  background: rgba(10,10,10,0.7); padding: 0.2rem 0.5rem;
-}
+.product-num { position: absolute; top: 1rem; left: 1rem; font-family: var(--ff-display); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.2em; background: rgba(10,10,10,0.7); padding: 0.2rem 0.5rem; }
 .product-info { padding: 1.5rem; }
 .product-name { font-family: var(--ff-display); font-size: 1.35rem; margin-bottom: 0.5rem; }
 .product-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
-.tag {
-  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-  border: 1px solid var(--gold); color: var(--gold);
-  padding: 0.2rem 0.6rem;
-}
+.tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--gold); color: var(--gold); padding: 0.2rem 0.6rem; }
 .product-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
 .product-for { font-size: 0.75rem; color: var(--gold); margin-top: 0.7rem; font-style: italic; }
 
-/* Product gallery modal */
-.modal {
-  display: none; position: fixed; inset: 0; z-index: 200;
-  background: rgba(10,10,10,0.95);
-  align-items: center; justify-content: center;
-}
+/* MODAL */
+.modal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,10,10,0.95); align-items: center; justify-content: center; }
 .modal.open { display: flex; }
-.modal-inner {
-  position: relative; width: 90vw; max-width: 900px;
-  max-height: 90vh; overflow-y: auto;
-  background: var(--black); border: 1px solid var(--border);
-}
-.modal-close {
-  position: absolute; top: 1rem; right: 1rem; z-index: 10;
-  background: var(--gold); color: var(--black);
-  border: none; width: 2.5rem; height: 2.5rem;
-  font-size: 1.2rem; cursor: pointer; display: flex;
-  align-items: center; justify-content: center;
-}
+.modal-inner { position: relative; width: 90vw; max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--black); border: 1px solid var(--border); }
+.modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 10; background: var(--gold); color: var(--black); border: none; width: 2.5rem; height: 2.5rem; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .modal-main-img { height: 420px; }
 .modal-thumbs { display: flex; gap: 4px; padding: 4px; background: #111; }
 .modal-thumb { width: 80px; height: 60px; cursor: pointer; opacity: 0.6; flex-shrink: 0; transition: var(--transition); }
@@ -265,7 +120,7 @@ section { padding: 6rem 4rem; }
 .modal-desc h2 { font-family: var(--ff-display); font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; }
 .modal-desc p { font-size: 0.88rem; line-height: 1.75; }
 
-/* ===== PORTFOLIO ===== */
+/* PORTFOLIO */
 #portfolio { background: var(--gray-light); padding: 6rem 4rem; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
 .portfolio-card { background: var(--white); overflow: hidden; }
@@ -278,36 +133,26 @@ section { padding: 6rem 4rem; }
 .portfolio-title { font-family: var(--ff-display); font-size: 1.1rem; margin: 0.3rem 0; }
 .portfolio-type { font-size: 0.75rem; color: var(--gray); }
 
-/* ===== TRUST SPECS ===== */
+/* TRUST */
 #trust { background: var(--black); padding: 5rem 4rem; }
 .specs-row { display: flex; justify-content: center; gap: 0; border: 1px solid var(--border); margin-bottom: 3rem; }
-.spec {
-  flex: 1; text-align: center; padding: 2rem 1.5rem;
-  border-right: 1px solid var(--border);
-  position: relative;
-}
+.spec { flex: 1; text-align: center; padding: 2rem 1.5rem; border-right: 1px solid var(--border); }
 .spec:last-child { border-right: none; }
 .spec-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
 .spec-val { font-family: var(--ff-display); font-size: 1.8rem; color: var(--gold); font-weight: 300; }
 .spec-label { font-size: 0.68rem; letter-spacing: 0.15em; color: rgba(250,250,248,0.4); text-transform: uppercase; margin-top: 0.3rem; }
-
 .certs-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--border); }
-.cert-item {
-  background: #111; text-align: center; padding: 1.5rem 1rem;
-  border: none;
-}
+.cert-item { background: #111; text-align: center; padding: 1.5rem 1rem; }
 .cert-name { font-family: var(--ff-display); font-size: 1.1rem; color: var(--gold); }
 .cert-sub { font-size: 0.65rem; color: rgba(250,250,248,0.4); margin-top: 0.3rem; letter-spacing: 0.08em; }
 
-/* ===== ABOUT + FACTORY ===== */
+/* ABOUT */
 #about { padding: 0; }
 .about-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
 .about-text { padding: 6rem 4rem; display: flex; flex-direction: column; justify-content: center; }
 .about-text p { font-size: 0.92rem; line-height: 1.85; color: #444; margin-bottom: 1rem; }
 .about-text strong { color: var(--black); }
-.about-text .gold-line {
-  width: 3rem; height: 2px; background: var(--gold); margin: 1.5rem 0;
-}
+.about-text .gold-line { width: 3rem; height: 2px; background: var(--gold); margin: 1.5rem 0; }
 .about-img { position: relative; min-height: 400px; }
 .factory-strip { background: var(--black); padding: 4rem; }
 .factory-numbers { display: flex; justify-content: space-around; gap: 2rem; flex-wrap: wrap; }
@@ -315,12 +160,11 @@ section { padding: 6rem 4rem; }
 .factory-num-val { font-family: var(--ff-display); font-size: 2.5rem; color: var(--gold); font-weight: 300; }
 .factory-num-label { font-size: 0.7rem; color: rgba(250,250,248,0.4); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.3rem; }
 
-/* ===== CONTACT ===== */
+/* CONTACT */
 #contact { padding: 6rem 4rem; background: var(--black); }
 #contact .section-title { color: var(--white); }
 #contact .section-sub { color: rgba(250,250,248,0.5); }
 .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; }
-.contact-info { }
 .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 2rem; }
 .contact-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
 .contact-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.3rem; }
@@ -328,63 +172,37 @@ section { padding: 6rem 4rem; }
 .contact-val a { color: rgba(250,250,248,0.85); transition: var(--transition); }
 .contact-val a:hover { color: var(--gold); }
 .contact-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
-.btn-wa {
-  display: inline-flex; align-items: center; gap: 0.7rem;
-  background: #25D366; color: white;
-  padding: 1rem 1.8rem; font-size: 0.85rem; font-weight: 500;
-  transition: var(--transition);
-}
+.btn-wa { display: inline-flex; align-items: center; gap: 0.7rem; background: #25D366; color: white; padding: 1rem 1.8rem; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
 .btn-wa:hover { background: #128C7E; }
-.btn-line {
-  display: inline-flex; align-items: center; gap: 0.7rem;
-  background: #00B900; color: white;
-  padding: 1rem 1.8rem; font-size: 0.85rem; font-weight: 500;
-  transition: var(--transition);
-}
+.btn-line { display: inline-flex; align-items: center; gap: 0.7rem; background: #00B900; color: white; padding: 1rem 1.8rem; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
 .btn-line:hover { background: #009900; }
-.contact-form { }
 .form-row { margin-bottom: 1rem; }
-.form-row input, .form-row select, .form-row textarea {
-  width: 100%; background: #111; border: 1px solid rgba(200,169,110,0.2);
-  color: var(--white); padding: 0.9rem 1rem;
-  font-family: var(--ff-body); font-size: 0.85rem;
-  outline: none; transition: var(--transition);
-}
+.form-row input, .form-row select, .form-row textarea { width: 100%; background: #111; border: 1px solid rgba(200,169,110,0.2); color: var(--white); padding: 0.9rem 1rem; font-family: var(--ff-body); font-size: 0.85rem; outline: none; transition: var(--transition); }
 .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--gold); }
 .form-row textarea { height: 100px; resize: none; }
 .form-row select option { background: #111; }
-.form-submit {
-  width: 100%; background: var(--gold); color: var(--black);
-  border: none; padding: 1rem; font-family: var(--ff-body);
-  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em;
-  text-transform: uppercase; cursor: pointer; transition: var(--transition);
-}
+.form-submit { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 1rem; font-family: var(--ff-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
 .form-submit:hover { background: var(--gold-light); }
 
-/* ===== FOOTER ===== */
-footer {
-  background: var(--black); border-top: 1px solid var(--border);
-  padding: 2rem 4rem;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 1rem;
-}
+/* FOOTER */
+footer { background: var(--black); border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .footer-logo { font-family: var(--ff-display); font-size: 1.1rem; color: var(--gold); letter-spacing: 0.2em; }
 .footer-certs { font-size: 0.65rem; color: rgba(250,250,248,0.3); letter-spacing: 0.1em; }
 .footer-copy { font-size: 0.7rem; color: rgba(250,250,248,0.3); }
-
-/* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: var(--gold); }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 900px) {
-  nav { padding: 1rem 1.5rem; }
+  nav { padding: 0.5rem 1.5rem; }
   .nav-links { display: none; }
   section { padding: 4rem 1.5rem; }
+  #scene { padding: 4rem 1.5rem; }
   .hero-content { padding: 0 1.5rem 4rem; }
   .hero-stats { display: none; }
   .scene-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .scene-card { height: 220px; }
   .scene-card:first-child { grid-column: span 2; }
   .product-grid { grid-template-columns: 1fr 1fr; }
   .about-split { grid-template-columns: 1fr; }
@@ -403,497 +221,455 @@ footer {
   .scene-grid { grid-template-columns: 1fr; }
   .scene-card:first-child { grid-column: span 1; }
 }
-
-/* ===== ANIMATIONS ===== */
 .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">鴻 <span>HUNGCHI</span></div>
+  <div class="nav-logo"><img src="images/logo.png" alt="Hungchi International"></div>
   <div class="nav-links">
-    <a href="#scene">Applications</a>
-    <a href="#products">Products</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#trust">Certifications</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="nav-cta">Contact Us</a>
+    <a href="#scene" data-i18n="nav.scene">Applications</a>
+    <a href="#products" data-i18n="nav.products">Products</a>
+    <a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="#trust" data-i18n="nav.trust">Certifications</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact Us</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content fade-in visible">
-    <div class="hero-tag">Hungchi International · Est. 2008 · Taiwan</div>
-    <h1 class="hero-h1">We Build the<br>Future <em>of Space</em></h1>
-    <p class="hero-sub">
-      Intelligent modular spaces — <strong>Taiwan-designed, globally delivered.</strong><br>
-      From luxury glamping to commercial hubs, crafted for the world's most inspiring locations.
-    </p>
+    <div class="hero-tag" data-i18n="hero.tag">Hungchi International · Est. 2008 · Taiwan</div>
+    <h1 class="hero-h1" data-i18n="hero.h1">We Build the<br>Future <em>of Space</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Intelligent modular spaces — <strong>Taiwan-designed, globally delivered.</strong><br>From luxury glamping to commercial hubs, crafted for the world's most inspiring locations.</p>
     <div class="hero-actions">
-      <a href="#products" class="btn-primary">Explore Products ↓</a>
-      <a href="https://wa.me/886901077444?text=Hello%2C%20I%20am%20interested%20in%20Hungchi%20modular%20spaces." class="btn-secondary" target="_blank">💬 WhatsApp Us</a>
+      <a href="#products" class="btn-primary" data-i18n="hero.cta1">Explore Products ↓</a>
+      <a href="https://line.me/ti/p/Cfcb2TSRJg" class="btn-secondary" target="_blank" data-i18n="hero.cta2">💚 LINE Us</a>
     </div>
   </div>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">500</div><div class="stat-label">Units / Month</div></div>
-    <div class="stat"><div class="stat-num">19,421</div><div class="stat-label">m² Factory</div></div>
-    <div class="stat"><div class="stat-num">70+</div><div class="stat-label">Year Lifespan</div></div>
+    <div class="stat"><div class="stat-num">500</div><div class="stat-label" data-i18n="stat.1">Units / Month</div></div>
+    <div class="stat"><div class="stat-num">19,421</div><div class="stat-label" data-i18n="stat.2">m² Factory</div></div>
+    <div class="stat"><div class="stat-num">70+</div><div class="stat-label" data-i18n="stat.3">Year Lifespan</div></div>
   </div>
 </section>
 
-<!-- APPLICATIONS -->
 <section id="scene">
-  <div class="section-tag">Applications</div>
-  <h2 class="section-title" style="color:var(--white)">Where Our Spaces <em>Shine</em></h2>
-  <p class="section-sub">Whether you run a resort, restaurant, golf club or diving base — our modular structures are built for your vision.</p>
+  <div class="section-tag" data-i18n="scene.tag">Applications</div>
+  <h2 class="section-title" style="color:var(--white)" data-i18n="scene.title">Where Our Spaces <em>Shine</em></h2>
+  <p class="section-sub" data-i18n="scene.sub">Whether you run a resort, restaurant, golf club or diving base — our modular structures are built for your vision.</p>
   <div class="scene-grid fade-in">
-    <div class="scene-card">
-      <img src="images/apple_main.jpg" alt="Homestay Hotel">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🏡</div>
-        <div class="scene-name">Homestay &amp; Boutique Hotel</div>
-        <div class="scene-desc">Glamping · Eco-resort · Villa stays</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/container_main.jpg" alt="Restaurant">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">☕</div>
-        <div class="scene-name">Restaurants &amp; Cafés</div>
-        <div class="scene-desc">Unique dining · Pop-up F&amp;B</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/starship_main.jpg" alt="Golf Club">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🏌️</div>
-        <div class="scene-name">Golf Club VIP Lounge</div>
-        <div class="scene-desc">Clubhouse · Caddy stations · Viewing decks</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/capsule_main.jpg" alt="Diving Resort">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🤿</div>
-        <div class="scene-name">Diving &amp; Beach Resort</div>
-        <div class="scene-desc">Coastal stays · Water activity bases</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/silent_main.jpg" alt="Office">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🏢</div>
-        <div class="scene-name">Office &amp; Commercial</div>
-        <div class="scene-desc">Sales centers · Co-working · Pop-up retail</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/folding_main.jpg" alt="Construction Site">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🏗️</div>
-        <div class="scene-name">Construction &amp; Industrial</div>
-        <div class="scene-desc">Site offices · Temporary housing · Warehouses</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/triangle_main.jpg" alt="Cultural Tourism">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🌆</div>
-        <div class="scene-name">Cultural Tourism</div>
-        <div class="scene-desc">Landmarks · Scenic attractions · Parks</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <img src="images/capsule_5.jpg" alt="Luxury Glamping">
-      <div class="scene-card-overlay">
-        <div class="scene-icon">🏕️</div>
-        <div class="scene-name">Luxury Glamping</div>
-        <div class="scene-desc">Eco-tourism · Outdoor retreats · Safari stays</div>
-      </div>
-    </div>
+    <div class="scene-card"><img src="images/apple_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏡</div><div class="scene-name" data-i18n="scene.1.name">Homestay &amp; Boutique Hotel</div><div class="scene-desc" data-i18n="scene.1.desc">Glamping · Eco-resort · Villa stays</div></div></div>
+    <div class="scene-card"><img src="images/container_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">☕</div><div class="scene-name" data-i18n="scene.2.name">Restaurants &amp; Cafés</div><div class="scene-desc" data-i18n="scene.2.desc">Unique dining · Pop-up F&amp;B</div></div></div>
+    <div class="scene-card"><img src="images/starship_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏌️</div><div class="scene-name" data-i18n="scene.3.name">Golf Club VIP Lounge</div><div class="scene-desc" data-i18n="scene.3.desc">Clubhouse · Caddy stations · Viewing decks</div></div></div>
+    <div class="scene-card"><img src="images/capsule_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🤿</div><div class="scene-name" data-i18n="scene.4.name">Diving &amp; Beach Resort</div><div class="scene-desc" data-i18n="scene.4.desc">Coastal stays · Water activity bases</div></div></div>
+    <div class="scene-card"><img src="images/silent_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏢</div><div class="scene-name" data-i18n="scene.5.name">Office &amp; Commercial</div><div class="scene-desc" data-i18n="scene.5.desc">Sales centers · Co-working · Pop-up retail</div></div></div>
+    <div class="scene-card"><img src="images/folding_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏗️</div><div class="scene-name" data-i18n="scene.6.name">Construction &amp; Industrial</div><div class="scene-desc" data-i18n="scene.6.desc">Site offices · Temporary housing · Warehouses</div></div></div>
+    <div class="scene-card"><img src="images/triangle_main.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🌆</div><div class="scene-name" data-i18n="scene.7.name">Cultural Tourism</div><div class="scene-desc" data-i18n="scene.7.desc">Landmarks · Scenic attractions · Parks</div></div></div>
+    <div class="scene-card"><img src="images/capsule_5.jpg" alt=""><div class="scene-card-overlay"><div class="scene-icon">🏕️</div><div class="scene-name" data-i18n="scene.8.name">Luxury Glamping</div><div class="scene-desc" data-i18n="scene.8.desc">Eco-tourism · Outdoor retreats · Safari stays</div></div></div>
   </div>
 </section>
 
-<!-- Philippines Banner -->
 <div class="ph-banner fade-in">
   <div class="ph-flag">🇵🇭</div>
   <div class="ph-text">
-    <h3>Now Entering the Philippine Market</h3>
-    <p>We are actively seeking our first Philippine partners across hospitality, F&amp;B, golf, diving, and commercial sectors.<br>
-    <strong style="color:var(--gold-light)">Early partners receive priority pricing and dedicated project support.</strong></p>
+    <h3 data-i18n="ph.title">Now Entering the Philippine Market</h3>
+    <p data-i18n="ph.desc">We are actively seeking our first Philippine partners across hospitality, F&amp;B, golf, diving, and commercial sectors.<br><strong style="color:var(--gold-light)" data-i18n="ph.highlight">Early partners receive priority pricing and dedicated project support.</strong></p>
   </div>
-  <a href="https://wa.me/886901077444?text=Hi%2C%20I%20am%20a%20Philippine%20business%20partner%20interested%20in%20Hungchi%20spaces." class="ph-cta" target="_blank">💬 Talk to Wesley</a>
+  <a href="https://line.me/ti/p/Cfcb2TSRJg" class="ph-cta" target="_blank" data-i18n="ph.cta">💚 Talk to Wesley</a>
 </div>
 
-<!-- PRODUCTS -->
 <section id="products">
   <div class="products-header fade-in">
     <div>
-      <div class="section-tag">Our Products</div>
-      <h2 class="section-title">Six Signature <em>Space Solutions</em></h2>
+      <div class="section-tag" data-i18n="prod.tag">Our Products</div>
+      <h2 class="section-title" data-i18n="prod.title">Six Signature <em>Space Solutions</em></h2>
     </div>
-    <a href="#contact" class="btn-primary">Request a Quote →</a>
+    <a href="#contact" class="btn-primary" data-i18n="prod.quote">Request a Quote →</a>
   </div>
-
   <div class="product-grid fade-in">
-    <!-- Apple Cabin -->
     <div class="product-card" onclick="openModal('apple')">
-      <div class="product-img">
-        <img src="images/apple_main.jpg" alt="Apple Cabin">
-        <div class="product-num">01</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Apple Cabin</div>
-        <div class="product-tags"><span class="tag">Solar</span><span class="tag">Eco</span><span class="tag">Smart Home</span></div>
-        <div class="product-desc">Minimalist modular space with seamless splicing. Solar &amp; wind powered, Low-E double glass, available in aluminum, galvanized or bamboo finishes.</div>
-        <div class="product-for">✦ Ideal for: Resorts · Homestays · Golf Clubs</div>
-      </div>
+      <div class="product-img"><img src="images/apple_main.jpg" alt="Apple Cabin"><div class="product-num">01</div></div>
+      <div class="product-info"><div class="product-name">Apple Cabin</div><div class="product-tags"><span class="tag">Solar</span><span class="tag">Eco</span><span class="tag">Smart Home</span></div><div class="product-desc" data-i18n="p.apple.desc">Minimalist modular space with seamless splicing. Solar &amp; wind powered, Low-E double glass, available in aluminum, galvanized or bamboo finishes.</div><div class="product-for" data-i18n="p.apple.for">✦ Ideal for: Resorts · Homestays · Golf Clubs</div></div>
     </div>
-    <!-- Starship Cabin -->
     <div class="product-card" onclick="openModal('starship')">
-      <div class="product-img">
-        <img src="images/starship_main.jpg" alt="Starship Cabin">
-        <div class="product-num">02</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Starship Cabin</div>
-        <div class="product-tags"><span class="tag">270° View</span><span class="tag">1–2 Days Install</span></div>
-        <div class="product-desc">Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days.</div>
-        <div class="product-for">✦ Ideal for: Glamping · Scenic Landmarks · Resorts</div>
-      </div>
+      <div class="product-img"><img src="images/starship_main.jpg" alt="Starship Cabin"><div class="product-num">02</div></div>
+      <div class="product-info"><div class="product-name">Starship Cabin</div><div class="product-tags"><span class="tag">270° View</span><span class="tag">1–2 Days Install</span></div><div class="product-desc" data-i18n="p.starship.desc">Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days.</div><div class="product-for" data-i18n="p.starship.for">✦ Ideal for: Glamping · Scenic Landmarks · Resorts</div></div>
     </div>
-    <!-- Folding Room -->
     <div class="product-card" onclick="openModal('folding')">
-      <div class="product-img">
-        <img src="images/folding_main.jpg" alt="Folding Room">
-        <div class="product-num">03</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Folding Room</div>
-        <div class="product-tags"><span class="tag">Portable</span><span class="tag">Waterproof</span><span class="tag">Fast Deploy</span></div>
-        <div class="product-desc">Double-wing folding house. Galvanized steel frame, compact for transport. Earthquake &amp; typhoon resistant — deploys in hours.</div>
-        <div class="product-for">✦ Ideal for: Construction Sites · Temporary Offices · Events</div>
-      </div>
+      <div class="product-img"><img src="images/folding_main.jpg" alt="Folding Room"><div class="product-num">03</div></div>
+      <div class="product-info"><div class="product-name" data-i18n="p.folding.name">Folding Room</div><div class="product-tags"><span class="tag">Portable</span><span class="tag">Waterproof</span><span class="tag">Fast Deploy</span></div><div class="product-desc" data-i18n="p.folding.desc">Double-wing folding house. Galvanized steel frame, compact for transport. Earthquake &amp; typhoon resistant — deploys in hours.</div><div class="product-for" data-i18n="p.folding.for">✦ Ideal for: Construction Sites · Temporary Offices · Events</div></div>
     </div>
-    <!-- Container House -->
     <div class="product-card" onclick="openModal('container')">
-      <div class="product-img">
-        <img src="images/container_main.jpg" alt="Container House">
-        <div class="product-num">04</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Container House</div>
-        <div class="product-tags"><span class="tag">Stackable</span><span class="tag">Custom</span><span class="tag">Industrial</span></div>
-        <div class="product-desc">Repurposed steel containers transformed into living and commercial spaces. Stackable in infinite configurations for unique architectural forms.</div>
-        <div class="product-for">✦ Ideal for: Cafés · Retail · Hospitality · Offices</div>
-      </div>
+      <div class="product-img"><img src="images/container_main.jpg" alt="Container House"><div class="product-num">04</div></div>
+      <div class="product-info"><div class="product-name" data-i18n="p.container.name">Container House</div><div class="product-tags"><span class="tag">Stackable</span><span class="tag">Custom</span><span class="tag">Industrial</span></div><div class="product-desc" data-i18n="p.container.desc">Repurposed steel containers transformed into living and commercial spaces. Stackable in infinite configurations for unique architectural forms.</div><div class="product-for" data-i18n="p.container.for">✦ Ideal for: Cafés · Retail · Hospitality · Offices</div></div>
     </div>
-    <!-- Silent Cabin -->
     <div class="product-card" onclick="openModal('silent')">
-      <div class="product-img">
-        <img src="images/silent_main.jpg" alt="Silent Cabin">
-        <div class="product-num">05</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Silent Cabin</div>
-        <div class="product-tags"><span class="tag">30–40 dB Reduction</span><span class="tag">Office Pod</span></div>
-        <div class="product-desc">Professional acoustic solution. High-density soundproofing, LED lighting, ventilation, USB &amp; Bluetooth. For 1–2 or 4–6 persons.</div>
-        <div class="product-for">✦ Ideal for: Co-working Spaces · Offices · Hotels</div>
-      </div>
+      <div class="product-img"><img src="images/silent_main.jpg" alt="Silent Cabin"><div class="product-num">05</div></div>
+      <div class="product-info"><div class="product-name" data-i18n="p.silent.name">Silent Cabin</div><div class="product-tags"><span class="tag">30–40 dB</span><span class="tag">Office Pod</span></div><div class="product-desc" data-i18n="p.silent.desc">Professional acoustic solution. High-density soundproofing, LED lighting, ventilation, USB &amp; Bluetooth. For 1–2 or 4–6 persons.</div><div class="product-for" data-i18n="p.silent.for">✦ Ideal for: Co-working Spaces · Offices · Hotels</div></div>
     </div>
-    <!-- Space Capsule -->
     <div class="product-card" onclick="openModal('capsule')">
-      <div class="product-img">
-        <img src="images/capsule_main.jpg" alt="Space Capsule">
-        <div class="product-num">06</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Space Capsule</div>
-        <div class="product-tags"><span class="tag">Aviation Al</span><span class="tag">Luxury</span><span class="tag">Smart Lock</span></div>
-        <div class="product-desc">High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, full bathroom &amp; 24h hot water.</div>
-        <div class="product-for">✦ Ideal for: Luxury Resorts · Beach Hotels · Glamping</div>
-      </div>
+      <div class="product-img"><img src="images/capsule_main.jpg" alt="Space Capsule"><div class="product-num">06</div></div>
+      <div class="product-info"><div class="product-name" data-i18n="p.capsule.name">Space Capsule</div><div class="product-tags"><span class="tag">Aviation Al</span><span class="tag">Luxury</span><span class="tag">Smart Lock</span></div><div class="product-desc" data-i18n="p.capsule.desc">High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, full bathroom &amp; 24h hot water.</div><div class="product-for" data-i18n="p.capsule.for">✦ Ideal for: Luxury Resorts · Beach Hotels · Glamping</div></div>
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section id="portfolio">
-  <div class="section-tag">Portfolio</div>
-  <h2 class="section-title">Proven Projects, <em>Global Reach</em></h2>
-  <p class="section-sub">Real deployments across Asia-Pacific, Europe, the Americas and Africa — every project tells a story.</p>
+  <div class="section-tag" data-i18n="port.tag">Portfolio</div>
+  <h2 class="section-title" data-i18n="port.title">Proven Projects, <em>Global Reach</em></h2>
+  <p class="section-sub" data-i18n="port.sub">Real deployments across Asia-Pacific, Europe, the Americas and Africa — every project tells a story.</p>
   <div class="portfolio-grid fade-in">
-    <div class="portfolio-card">
-      <div class="portfolio-img"><img src="images/case_taiwan.jpg" alt="Taiwan Apple Cabin Office"></div>
-      <div class="portfolio-meta">
-        <div class="portfolio-flag">🇹🇼</div>
-        <div class="portfolio-location">Taiwan</div>
-        <div class="portfolio-title">Apple Cabin Office</div>
-        <div class="portfolio-type">Commercial · Apple Cabin</div>
-      </div>
-    </div>
-    <div class="portfolio-card">
-      <div class="portfolio-img"><img src="images/apple_2.jpg" alt="Apple Cabin US"></div>
-      <div class="portfolio-meta">
-        <div class="portfolio-flag">🇺🇸</div>
-        <div class="portfolio-location">United States</div>
-        <div class="portfolio-title">Apple Cabin Living Room</div>
-        <div class="portfolio-type">Residential · Apple Cabin</div>
-      </div>
-    </div>
-    <div class="portfolio-card">
-      <div class="portfolio-img"><img src="images/case_jiaxing.jpg" alt="Jiaxing Coffee Station"></div>
-      <div class="portfolio-meta">
-        <div class="portfolio-flag">🇨🇳</div>
-        <div class="portfolio-location">Jiaxing, China</div>
-        <div class="portfolio-title">Nanhu Coffee Station</div>
-        <div class="portfolio-type">F&amp;B · Container</div>
-      </div>
-    </div>
-    <div class="portfolio-card">
-      <div class="portfolio-img"><img src="images/capsule_1.jpg" alt="Australia Spacecraft Hotel"></div>
-      <div class="portfolio-meta">
-        <div class="portfolio-flag">🇦🇺</div>
-        <div class="portfolio-location">Australia</div>
-        <div class="portfolio-title">Spacecraft Hotel</div>
-        <div class="portfolio-type">Luxury Stay · Space Capsule</div>
-      </div>
-    </div>
-    <div class="portfolio-card">
-      <div class="portfolio-img"><img src="images/capsule_2.jpg" alt="Hangzhou Resort"></div>
-      <div class="portfolio-meta">
-        <div class="portfolio-flag">🇨🇳</div>
-        <div class="portfolio-location">Hangzhou, China</div>
-        <div class="portfolio-title">Tonglu Spacecraft Resort</div>
-        <div class="portfolio-type">Tourism · Space Capsule</div>
-      </div>
-    </div>
-    <div class="portfolio-card">
-      <div class="portfolio-img"><img src="images/case_croatia.jpg" alt="Croatia Chain Hotel"></div>
-      <div class="portfolio-meta">
-        <div class="portfolio-flag">🇭🇷</div>
-        <div class="portfolio-location">Croatia</div>
-        <div class="portfolio-title">Chain Hotel Project</div>
-        <div class="portfolio-type">Hospitality · Folding Room</div>
-      </div>
-    </div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/case_taiwan.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇹🇼</div><div class="portfolio-location" data-i18n="case.1.loc">Taiwan</div><div class="portfolio-title" data-i18n="case.1.title">Apple Cabin Office</div><div class="portfolio-type" data-i18n="case.1.type">Commercial · Apple Cabin</div></div></div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/apple_2.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇺🇸</div><div class="portfolio-location" data-i18n="case.2.loc">United States</div><div class="portfolio-title" data-i18n="case.2.title">Apple Cabin Living Room</div><div class="portfolio-type" data-i18n="case.2.type">Residential · Apple Cabin</div></div></div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/case_jiaxing.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇨🇳</div><div class="portfolio-location" data-i18n="case.3.loc">Jiaxing, China</div><div class="portfolio-title" data-i18n="case.3.title">Nanhu Coffee Station</div><div class="portfolio-type" data-i18n="case.3.type">F&amp;B · Container</div></div></div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/capsule_1.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇦🇺</div><div class="portfolio-location" data-i18n="case.4.loc">Australia</div><div class="portfolio-title" data-i18n="case.4.title">Spacecraft Hotel</div><div class="portfolio-type" data-i18n="case.4.type">Luxury Stay · Space Capsule</div></div></div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/capsule_2.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇨🇳</div><div class="portfolio-location" data-i18n="case.5.loc">Hangzhou, China</div><div class="portfolio-title" data-i18n="case.5.title">Tonglu Spacecraft Resort</div><div class="portfolio-type" data-i18n="case.5.type">Tourism · Space Capsule</div></div></div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/case_croatia.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇭🇷</div><div class="portfolio-location" data-i18n="case.6.loc">Croatia</div><div class="portfolio-title" data-i18n="case.6.title">Chain Hotel Project</div><div class="portfolio-type" data-i18n="case.6.type">Hospitality · Folding Room</div></div></div>
   </div>
 </section>
 
-<!-- TRUST: SPECS + CERTS -->
 <section id="trust">
-  <div class="section-tag" style="color:var(--gold)">Why Trust Us</div>
-  <h2 class="section-title" style="color:var(--white)">Built to <em>Last. Built to Last.</em></h2>
-  <p class="section-sub" style="color:rgba(250,250,248,0.5); margin-bottom:3rem;">Every structure we build meets international standards for safety, durability, and environmental responsibility.</p>
-
+  <div class="section-tag" style="color:var(--gold)" data-i18n="trust.tag">Why Trust Us</div>
+  <h2 class="section-title" style="color:var(--white)" data-i18n="trust.title">Built to <em>Last.</em></h2>
+  <p class="section-sub" style="color:rgba(250,250,248,0.5);margin-bottom:3rem" data-i18n="trust.sub">Every structure we build meets international standards for safety, durability, and environmental responsibility.</p>
   <div class="specs-row fade-in">
-    <div class="spec"><div class="spec-icon">🌊</div><div class="spec-val">Mag. 9</div><div class="spec-label">Seismic Resistance</div></div>
-    <div class="spec"><div class="spec-icon">🌪️</div><div class="spec-val">Level 17</div><div class="spec-label">Typhoon Rating</div></div>
-    <div class="spec"><div class="spec-icon">🔥</div><div class="spec-val">A1 / B1</div><div class="spec-label">Fire Resistance</div></div>
-    <div class="spec"><div class="spec-icon">⏳</div><div class="spec-val">70+ Yrs</div><div class="spec-label">Structure Lifespan</div></div>
-    <div class="spec"><div class="spec-icon">🏭</div><div class="spec-val">500</div><div class="spec-label">Units / Month</div></div>
+    <div class="spec"><div class="spec-icon">🌊</div><div class="spec-val">Mag. 9</div><div class="spec-label" data-i18n="spec.1">Seismic Resistance</div></div>
+    <div class="spec"><div class="spec-icon">🌪️</div><div class="spec-val">Level 17</div><div class="spec-label" data-i18n="spec.2">Typhoon Rating</div></div>
+    <div class="spec"><div class="spec-icon">🔥</div><div class="spec-val">A1 / B1</div><div class="spec-label" data-i18n="spec.3">Fire Resistance</div></div>
+    <div class="spec"><div class="spec-icon">⏳</div><div class="spec-val">70+ Yrs</div><div class="spec-label" data-i18n="spec.4">Structure Lifespan</div></div>
+    <div class="spec"><div class="spec-icon">🏭</div><div class="spec-val">500</div><div class="spec-label" data-i18n="spec.5">Units / Month</div></div>
   </div>
-
   <div class="certs-grid fade-in">
-    <div class="cert-item"><div class="cert-name">EU CE</div><div class="cert-sub">European Market</div></div>
-    <div class="cert-item"><div class="cert-name">UKCA</div><div class="cert-sub">UK Market</div></div>
-    <div class="cert-item"><div class="cert-name">ISO 9001</div><div class="cert-sub">Quality Mgmt</div></div>
-    <div class="cert-item"><div class="cert-name">ISO 45001</div><div class="cert-sub">Safety Mgmt</div></div>
-    <div class="cert-item"><div class="cert-name">ISO 14001</div><div class="cert-sub">Environment</div></div>
-    <div class="cert-item"><div class="cert-name">Grade 3A</div><div class="cert-sub">Credit &amp; Contract</div></div>
+    <div class="cert-item"><div class="cert-name">EU CE</div><div class="cert-sub" data-i18n="cert.1">European Market</div></div>
+    <div class="cert-item"><div class="cert-name">UKCA</div><div class="cert-sub" data-i18n="cert.2">UK Market</div></div>
+    <div class="cert-item"><div class="cert-name">ISO 9001</div><div class="cert-sub" data-i18n="cert.3">Quality Mgmt</div></div>
+    <div class="cert-item"><div class="cert-name">ISO 45001</div><div class="cert-sub" data-i18n="cert.4">Safety Mgmt</div></div>
+    <div class="cert-item"><div class="cert-name">ISO 14001</div><div class="cert-sub" data-i18n="cert.5">Environment</div></div>
+    <div class="cert-item"><div class="cert-name">Grade 3A</div><div class="cert-sub" data-i18n="cert.6">Credit &amp; Contract</div></div>
   </div>
 </section>
 
-<!-- ABOUT + FACTORY -->
 <section id="about">
   <div class="about-split">
     <div class="about-text fade-in">
-      <div class="section-tag">About Hungchi</div>
-      <h2 class="section-title">Taiwan-Made.<br><em>World-Delivered.</em></h2>
+      <div class="section-tag" data-i18n="about.tag">About Hungchi</div>
+      <h2 class="section-title" data-i18n="about.title">Taiwan-Made.<br><em>World-Delivered.</em></h2>
       <div class="gold-line"></div>
-      <p>Hungchi International was founded in Taiwan with one belief: <strong>every business deserves a space that works as hard as they do.</strong></p>
-      <p>Since 2008, we have operated a <strong>19,421 m² metal structure manufacturing facility</strong>, staffed by 210 skilled technicians and equipped with large laser cutting, bending, and plasma welding equipment.</p>
-      <p>Our products are exported to Europe, Asia-Pacific, Africa, and the Americas — and we are now <strong>actively expanding across Southeast Asia</strong>, with dedicated support for our Philippine partners.</p>
-      <p>With EU CE, UKCA and ISO certifications, a Grade 3A credit rating, and multiple product patents, we are the preferred long-term partner for overseas clients seeking quality and reliability.</p>
+      <p data-i18n="about.p1">Hungchi International was founded in Taiwan with one belief: <strong>every business deserves a space that works as hard as they do.</strong></p>
+      <p data-i18n="about.p2">Since 2008, we have operated a <strong>19,421 m² metal structure manufacturing facility</strong>, staffed by 210 skilled technicians and equipped with large laser cutting, bending, and plasma welding equipment.</p>
+      <p data-i18n="about.p3">Our products are exported to Europe, Asia-Pacific, Africa, and the Americas — and we are now <strong>actively expanding across Southeast Asia</strong>, with dedicated support for our Philippine partners.</p>
+      <p data-i18n="about.p4">With EU CE, UKCA and ISO certifications, a Grade 3A credit rating, and multiple product patents, we are the preferred long-term partner for overseas clients seeking quality and reliability.</p>
     </div>
-    <div class="about-img">
-      <img src="images/factory_1.jpg" alt="Hungchi Factory">
-    </div>
+    <div class="about-img"><img src="images/factory_1.jpg" alt="Hungchi Factory"></div>
   </div>
   <div class="factory-strip">
     <div class="factory-numbers fade-in">
-      <div class="factory-num"><div class="factory-num-val">2008</div><div class="factory-num-label">Year Founded</div></div>
-      <div class="factory-num"><div class="factory-num-val">19,421 m²</div><div class="factory-num-label">Factory Floor</div></div>
-      <div class="factory-num"><div class="factory-num-val">210</div><div class="factory-num-label">Technical Workers</div></div>
-      <div class="factory-num"><div class="factory-num-val">25</div><div class="factory-num-label">Senior Technicians</div></div>
-      <div class="factory-num"><div class="factory-num-val">5</div><div class="factory-num-label">Top Designers</div></div>
-      <div class="factory-num"><div class="factory-num-val">500/mo</div><div class="factory-num-label">Production Capacity</div></div>
+      <div class="factory-num"><div class="factory-num-val">2008</div><div class="factory-num-label" data-i18n="fac.1">Year Founded</div></div>
+      <div class="factory-num"><div class="factory-num-val">19,421 m²</div><div class="factory-num-label" data-i18n="fac.2">Factory Floor</div></div>
+      <div class="factory-num"><div class="factory-num-val">210</div><div class="factory-num-label" data-i18n="fac.3">Technical Workers</div></div>
+      <div class="factory-num"><div class="factory-num-val">25</div><div class="factory-num-label" data-i18n="fac.4">Senior Technicians</div></div>
+      <div class="factory-num"><div class="factory-num-val">5</div><div class="factory-num-label" data-i18n="fac.5">Top Designers</div></div>
+      <div class="factory-num"><div class="factory-num-val">500/mo</div><div class="factory-num-label" data-i18n="fac.6">Production Capacity</div></div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="section-tag">Get In Touch</div>
-  <h2 class="section-title" style="color:var(--white)">Start Your <em>Project Today</em></h2>
-  <p class="section-sub">Ready to explore modular space solutions? Contact our team for product inquiries, custom quotes, and international shipping.</p>
+  <div class="section-tag" data-i18n="con.tag">Get In Touch</div>
+  <h2 class="section-title" style="color:var(--white)" data-i18n="con.title">Start Your <em>Project Today</em></h2>
+  <p class="section-sub" data-i18n="con.sub">Ready to explore modular space solutions? Contact our team for product inquiries, custom quotes, and international shipping.</p>
   <div class="contact-layout fade-in">
     <div class="contact-info">
-      <div class="contact-item">
-        <div class="contact-icon">👤</div>
-        <div><div class="contact-label">Contact</div><div class="contact-val">Wesley Chen — International Sales</div></div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div><div class="contact-label">Phone / WhatsApp</div><div class="contact-val"><a href="tel:+886901077444">(+886) 0901-077-444</a></div></div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">✉️</div>
-        <div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:Hungwen883123@gmail.com">Hungwen883123@gmail.com</a></div></div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🌍</div>
-        <div><div class="contact-label">Markets</div><div class="contact-val">Europe · Asia-Pacific · Africa · Americas<br><strong style="color:var(--gold)">🇵🇭 Philippines — Now Open</strong></div></div>
-      </div>
+      <div class="contact-item"><div class="contact-icon">👤</div><div><div class="contact-label" data-i18n="con.l1">Contact</div><div class="contact-val" data-i18n="con.v1">Wesley Chen — International Sales</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label" data-i18n="con.l2">Phone / WhatsApp</div><div class="contact-val"><a href="tel:+886901077444">(+886) 0901-077-444</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label" data-i18n="con.l3">Email</div><div class="contact-val"><a href="mailto:Hungwen883123@gmail.com">Hungwen883123@gmail.com</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">🌍</div><div><div class="contact-label" data-i18n="con.l4">Markets</div><div class="contact-val" data-i18n="con.v4">Europe · Asia-Pacific · Africa · Americas<br><strong style="color:var(--gold)">🇵🇭 Philippines — Now Open</strong></div></div></div>
       <div class="contact-actions">
-        <a href="https://wa.me/886901077444?text=Hello%20Wesley%2C%20I%20am%20interested%20in%20Hungchi%20modular%20spaces." class="btn-wa" target="_blank">💬 Chat on WhatsApp</a>
-        <a href="https://line.me/ti/p/~hungchi_international" class="btn-line" target="_blank">💚 Add on LINE</a>
+        <a href="https://wa.me/886901077444?text=Hello%20Wesley%2C%20I%20am%20interested%20in%20Hungchi%20modular%20spaces." class="btn-wa" target="_blank" data-i18n="con.wa">💬 Chat on WhatsApp</a>
+        <a href="https://line.me/ti/p/Cfcb2TSRJg" class="btn-line" target="_blank" data-i18n="con.line">💚 Add on LINE</a>
       </div>
     </div>
     <div class="contact-form">
-      <div class="form-row"><input type="text" placeholder="Your Name *"></div>
-      <div class="form-row"><input type="email" placeholder="Email Address *"></div>
-      <div class="form-row"><input type="text" placeholder="Company / Project Name"></div>
+      <div class="form-row"><input type="text" id="f-name" placeholder="Your Name *"></div>
+      <div class="form-row"><input type="email" id="f-email" placeholder="Email Address *"></div>
+      <div class="form-row"><input type="text" id="f-company" placeholder="Company / Project Name"></div>
       <div class="form-row">
-        <select>
-          <option value="" disabled selected>Your Industry</option>
-          <option>Hospitality / Resort / Homestay</option>
-          <option>Golf Club / Sports Facility</option>
-          <option>Diving / Beach / Water Sports</option>
-          <option>Restaurant / F&B</option>
-          <option>Construction / Real Estate</option>
-          <option>Umbrella / Manufacturing / Trade</option>
-          <option>Office / Commercial</option>
-          <option>Other</option>
+        <select id="f-industry">
+          <option value="" disabled selected data-i18n="form.industry">Your Industry</option>
+          <option data-i18n="ind.1">Hospitality / Resort / Homestay</option>
+          <option data-i18n="ind.2">Golf Club / Sports Facility</option>
+          <option data-i18n="ind.3">Diving / Beach / Water Sports</option>
+          <option data-i18n="ind.4">Restaurant / F&amp;B</option>
+          <option data-i18n="ind.5">Construction / Real Estate</option>
+          <option data-i18n="ind.6">Manufacturing / Trade</option>
+          <option data-i18n="ind.7">Office / Commercial</option>
+          <option data-i18n="ind.8">Other</option>
         </select>
       </div>
       <div class="form-row">
-        <select>
-          <option value="" disabled selected>Product Interest</option>
+        <select id="f-product">
+          <option value="" disabled selected data-i18n="form.product">Product Interest</option>
           <option>Apple Cabin</option>
           <option>Starship Cabin</option>
-          <option>Folding Room</option>
-          <option>Container House</option>
-          <option>Silent Cabin</option>
-          <option>Space Capsule</option>
-          <option>Not Sure — Need Consultation</option>
+          <option data-i18n="p.folding.name">Folding Room</option>
+          <option data-i18n="p.container.name">Container House</option>
+          <option data-i18n="p.silent.name">Silent Cabin</option>
+          <option data-i18n="p.capsule.name">Space Capsule</option>
+          <option data-i18n="form.unsure">Not Sure — Need Consultation</option>
         </select>
       </div>
-      <div class="form-row"><textarea placeholder="Tell us about your project, location, and quantity requirements..."></textarea></div>
-      <button class="form-submit" onclick="alert('Thank you! Wesley will contact you within 24 hours.')">Send Inquiry →</button>
+      <div class="form-row"><textarea id="f-msg" placeholder="Tell us about your project, location, and quantity requirements..."></textarea></div>
+      <button class="form-submit" id="form-submit-btn" onclick="handleSubmit()">Send Inquiry →</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">鴻 · HUNG</div>
   <div class="footer-certs">EU CE · UKCA · ISO 9001 · ISO 45001 · ISO 14001 · Grade 3A</div>
-  <div class="footer-copy">© 2026 Hungchi International Ltd. · Est. 2008 · Taiwan</div>
+  <div class="footer-copy" data-i18n="footer.copy">© 2026 Hungchi International Ltd. · Est. 2008 · Taiwan</div>
 </footer>
 
-<!-- PRODUCT MODAL -->
 <div class="modal" id="productModal">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-main-img"><img id="modalMainImg" src="" alt=""></div>
     <div class="modal-thumbs" id="modalThumbs"></div>
-    <div class="modal-desc">
-      <h2 id="modalTitle"></h2>
-      <p id="modalDesc"></p>
-    </div>
+    <div class="modal-desc"><h2 id="modalTitle"></h2><p id="modalDesc"></p></div>
   </div>
 </div>
 
 <script>
-// Fade-in on scroll
+const T = {
+  en: {
+    'nav.scene':'Applications','nav.products':'Products','nav.portfolio':'Portfolio','nav.trust':'Certifications','nav.about':'About','nav.contact':'Contact Us',
+    'hero.tag':'Hungchi International · Est. 2008 · Taiwan',
+    'hero.h1':'We Build the<br>Future <em>of Space</em>',
+    'hero.sub':'Intelligent modular spaces — <strong>Taiwan-designed, globally delivered.</strong><br>From luxury glamping to commercial hubs, crafted for the world\'s most inspiring locations.',
+    'hero.cta1':'Explore Products ↓','hero.cta2':'💚 LINE Us',
+    'stat.1':'Units / Month','stat.2':'m² Factory','stat.3':'Year Lifespan',
+    'scene.tag':'Applications','scene.title':'Where Our Spaces <em>Shine</em>',
+    'scene.sub':'Whether you run a resort, restaurant, golf club or diving base — our modular structures are built for your vision.',
+    'scene.1.name':'Homestay &amp; Boutique Hotel','scene.1.desc':'Glamping · Eco-resort · Villa stays',
+    'scene.2.name':'Restaurants &amp; Cafés','scene.2.desc':'Unique dining · Pop-up F&amp;B',
+    'scene.3.name':'Golf Club VIP Lounge','scene.3.desc':'Clubhouse · Caddy stations · Viewing decks',
+    'scene.4.name':'Diving &amp; Beach Resort','scene.4.desc':'Coastal stays · Water activity bases',
+    'scene.5.name':'Office &amp; Commercial','scene.5.desc':'Sales centers · Co-working · Pop-up retail',
+    'scene.6.name':'Construction &amp; Industrial','scene.6.desc':'Site offices · Temporary housing · Warehouses',
+    'scene.7.name':'Cultural Tourism','scene.7.desc':'Landmarks · Scenic attractions · Parks',
+    'scene.8.name':'Luxury Glamping','scene.8.desc':'Eco-tourism · Outdoor retreats · Safari stays',
+    'ph.title':'Now Entering the Philippine Market',
+    'ph.desc':'We are actively seeking our first Philippine partners across hospitality, F&amp;B, golf, diving, and commercial sectors.<br><strong style="color:var(--gold-light)">Early partners receive priority pricing and dedicated project support.</strong>',
+    'ph.cta':'💚 Talk to Wesley',
+    'prod.tag':'Our Products','prod.title':'Six Signature <em>Space Solutions</em>','prod.quote':'Request a Quote →',
+    'p.apple.desc':'Minimalist modular space with seamless splicing. Solar &amp; wind powered, Low-E double glass, available in aluminum, galvanized or bamboo finishes.',
+    'p.apple.for':'✦ Ideal for: Resorts · Homestays · Golf Clubs',
+    'p.starship.desc':'Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days.',
+    'p.starship.for':'✦ Ideal for: Glamping · Scenic Landmarks · Resorts',
+    'p.folding.name':'Folding Room',
+    'p.folding.desc':'Double-wing folding house. Galvanized steel frame, compact for transport. Earthquake &amp; typhoon resistant — deploys in hours.',
+    'p.folding.for':'✦ Ideal for: Construction Sites · Temporary Offices · Events',
+    'p.container.name':'Container House',
+    'p.container.desc':'Repurposed steel containers transformed into living and commercial spaces. Stackable in infinite configurations for unique architectural forms.',
+    'p.container.for':'✦ Ideal for: Cafés · Retail · Hospitality · Offices',
+    'p.silent.name':'Silent Cabin',
+    'p.silent.desc':'Professional acoustic solution. High-density soundproofing, LED lighting, ventilation, USB &amp; Bluetooth. For 1–2 or 4–6 persons.',
+    'p.silent.for':'✦ Ideal for: Co-working Spaces · Offices · Hotels',
+    'p.capsule.name':'Space Capsule',
+    'p.capsule.desc':'High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, full bathroom &amp; 24h hot water.',
+    'p.capsule.for':'✦ Ideal for: Luxury Resorts · Beach Hotels · Glamping',
+    'port.tag':'Portfolio','port.title':'Proven Projects, <em>Global Reach</em>',
+    'port.sub':'Real deployments across Asia-Pacific, Europe, the Americas and Africa — every project tells a story.',
+    'case.1.loc':'Taiwan','case.1.title':'Apple Cabin Office','case.1.type':'Commercial · Apple Cabin',
+    'case.2.loc':'United States','case.2.title':'Apple Cabin Living Room','case.2.type':'Residential · Apple Cabin',
+    'case.3.loc':'Jiaxing, China','case.3.title':'Nanhu Coffee Station','case.3.type':'F&amp;B · Container',
+    'case.4.loc':'Australia','case.4.title':'Spacecraft Hotel','case.4.type':'Luxury Stay · Space Capsule',
+    'case.5.loc':'Hangzhou, China','case.5.title':'Tonglu Spacecraft Resort','case.5.type':'Tourism · Space Capsule',
+    'case.6.loc':'Croatia','case.6.title':'Chain Hotel Project','case.6.type':'Hospitality · Folding Room',
+    'trust.tag':'Why Trust Us','trust.title':'Built to <em>Last.</em>',
+    'trust.sub':'Every structure we build meets international standards for safety, durability, and environmental responsibility.',
+    'spec.1':'Seismic Resistance','spec.2':'Typhoon Rating','spec.3':'Fire Resistance','spec.4':'Structure Lifespan','spec.5':'Units / Month',
+    'cert.1':'European Market','cert.2':'UK Market','cert.3':'Quality Mgmt','cert.4':'Safety Mgmt','cert.5':'Environment','cert.6':'Credit &amp; Contract',
+    'about.tag':'About Hungchi','about.title':'Taiwan-Made.<br><em>World-Delivered.</em>',
+    'about.p1':'Hungchi International was founded in Taiwan with one belief: <strong>every business deserves a space that works as hard as they do.</strong>',
+    'about.p2':'Since 2008, we have operated a <strong>19,421 m² metal structure manufacturing facility</strong>, staffed by 210 skilled technicians and equipped with large laser cutting, bending, and plasma welding equipment.',
+    'about.p3':'Our products are exported to Europe, Asia-Pacific, Africa, and the Americas — and we are now <strong>actively expanding across Southeast Asia</strong>, with dedicated support for our Philippine partners.',
+    'about.p4':'With EU CE, UKCA and ISO certifications, a Grade 3A credit rating, and multiple product patents, we are the preferred long-term partner for overseas clients seeking quality and reliability.',
+    'fac.1':'Year Founded','fac.2':'Factory Floor','fac.3':'Technical Workers','fac.4':'Senior Technicians','fac.5':'Top Designers','fac.6':'Production Capacity',
+    'con.tag':'Get In Touch','con.title':'Start Your <em>Project Today</em>',
+    'con.sub':'Ready to explore modular space solutions? Contact our team for product inquiries, custom quotes, and international shipping.',
+    'con.l1':'Contact','con.v1':'Wesley Chen — International Sales',
+    'con.l2':'Phone / WhatsApp','con.l3':'Email','con.l4':'Markets',
+    'con.v4':'Europe · Asia-Pacific · Africa · Americas<br><strong style="color:var(--gold)">🇵🇭 Philippines — Now Open</strong>',
+    'con.wa':'💬 Chat on WhatsApp','con.line':'💚 Add on LINE',
+    'form.industry':'Your Industry','form.product':'Product Interest','form.unsure':'Not Sure — Need Consultation',
+    'ind.1':'Hospitality / Resort / Homestay','ind.2':'Golf Club / Sports Facility','ind.3':'Diving / Beach / Water Sports',
+    'ind.4':'Restaurant / F&B','ind.5':'Construction / Real Estate','ind.6':'Manufacturing / Trade','ind.7':'Office / Commercial','ind.8':'Other',
+    'footer.copy':'© 2026 Hungchi International Ltd. · Est. 2008 · Taiwan',
+    'submit.btn':'Send Inquiry →','submit.ok':'✓ Message Sent! Wesley will reply within 24 hours.',
+    'modal.apple.desc':'Minimalist modular space with seamless splicing technology. Solar & wind powered, Low-E double glass, aluminum, galvanized or bamboo finishes. Seismic Mag. 9, Typhoon Level 17 resistant.',
+    'modal.starship.desc':'Futuristic capsule for stargazing. 270° panoramic windows, aluminum alloy frames, smart home systems. Assembled in just 1–2 days. Perfect for glamping and scenic landmarks.',
+    'modal.folding.desc':'Double-wing folding house. Galvanized steel frame, fast deployment in hours. Earthquake & typhoon resistant. Ideal for construction sites, events, and temporary commercial use.',
+    'modal.container.desc':'Steel containers transformed into living and commercial spaces. Stackable in infinite configurations. High-strength steel structure with creative exterior personalization.',
+    'modal.silent.desc':'Professional acoustic solution with 30–40 dB noise reduction. High-density soundproofing, LED lighting, USB, Bluetooth speaker, temperature control. For 1–2 or 4–6 persons.',
+    'modal.capsule.desc':'High-end travel accommodation. Aviation aluminum shell, smart locks, premium bedding, smart TV, full bathroom & 24h hot water. Futuristic design for luxury resort destinations.',
+  },
+  zh: {
+    'nav.scene':'應用場景','nav.products':'產品','nav.portfolio':'作品集','nav.trust':'認證','nav.about':'關於我們','nav.contact':'聯絡我們',
+    'hero.tag':'鴻記國際有限公司 · 成立 2008 · 台灣',
+    'hero.h1':'打造未來的<br><em>智能空間</em>',
+    'hero.sub':'智能模組化空間 — <strong>台灣設計，全球交付。</strong><br>從奢華露營到商業園區，為世界各地最動人的地點量身打造。',
+    'hero.cta1':'探索產品 ↓','hero.cta2':'💚 LINE 聯絡我們',
+    'stat.1':'台 / 月','stat.2':'工廠面積 m²','stat.3':'年使用壽命',
+    'scene.tag':'應用場景','scene.title':'我們的空間 <em>無所不在</em>',
+    'scene.sub':'無論您經營度假村、餐廳、高爾夫球場或潛水基地——我們的模組化建築為您的願景而生。',
+    'scene.1.name':'民宿 &amp; 精品旅館','scene.1.desc':'露營度假 · 生態旅宿 · 別墅',
+    'scene.2.name':'餐廳 &amp; 咖啡廳','scene.2.desc':'特色餐飲 · 快閃餐飲',
+    'scene.3.name':'高爾夫 VIP 貴賓室','scene.3.desc':'會所 · 球僮站 · 觀景台',
+    'scene.4.name':'潛水 &amp; 海灘度假村','scene.4.desc':'海岸住宿 · 水上活動基地',
+    'scene.5.name':'辦公 &amp; 商業空間','scene.5.desc':'銷售中心 · 共享辦公 · 快閃零售',
+    'scene.6.name':'建築 &amp; 工業用途','scene.6.desc':'工地辦公室 · 臨時住所 · 倉庫',
+    'scene.7.name':'文化觀光','scene.7.desc':'地標 · 風景區 · 公園',
+    'scene.8.name':'奢華露營','scene.8.desc':'生態旅遊 · 戶外度假 · 叢林住宿',
+    'ph.title':'菲律賓市場正式啟動',
+    'ph.desc':'我們正積極尋找菲律賓合作夥伴，涵蓋餐旅、餐飲、高爾夫、潛水及商業領域。<br><strong style="color:var(--gold-light)">優先合作夥伴享有專屬定價與專案支援。</strong>',
+    'ph.cta':'💚 聯絡 Wesley',
+    'prod.tag':'我們的產品','prod.title':'六款招牌 <em>空間解決方案</em>','prod.quote':'索取報價 →',
+    'p.apple.desc':'極簡模組化空間，支援無縫拼接。太陽能與風能供電，Low-E 雙層玻璃，鋁製、鍍鋅或竹材飾面可選。',
+    'p.apple.for':'✦ 適合：度假村 · 民宿 · 高爾夫球場',
+    'p.starship.desc':'未來感太空艙，專為觀星體驗設計。270° 全景窗、鋁合金框架、智能家居系統，僅需 1–2 天組裝完成。',
+    'p.starship.for':'✦ 適合：豪華露營 · 風景地標 · 度假村',
+    'p.folding.name':'折疊屋',
+    'p.folding.desc':'雙翼折疊式房屋，鍍鋅鋼框，便於運輸。抗震防颱，數小時內完成部署。',
+    'p.folding.for':'✦ 適合：工地 · 臨時辦公 · 活動場所',
+    'p.container.name':'貨櫃屋',
+    'p.container.desc':'以鋼鐵貨櫃改造為生活與商業空間，可無限疊加組合，創造獨特建築形態。',
+    'p.container.for':'✦ 適合：咖啡廳 · 零售 · 餐旅 · 辦公',
+    'p.silent.name':'靜音艙',
+    'p.silent.desc':'專業隔音解決方案。高密度隔音材料、LED 燈光、通風系統、USB 與藍牙。適合 1–2 人或 4–6 人。',
+    'p.silent.for':'✦ 適合：共享辦公 · 企業辦公 · 飯店',
+    'p.capsule.name':'太空膠囊',
+    'p.capsule.desc':'高端旅宿體驗。航空鋁外殼、智能門鎖、頂級寢具、全套衛浴 &amp; 24 小時熱水。',
+    'p.capsule.for':'✦ 適合：奢華度假村 · 海灘飯店 · 豪華露營',
+    'port.tag':'作品集','port.title':'實績案例，<em>遍佈全球</em>',
+    'port.sub':'橫跨亞太、歐洲、美洲與非洲的真實部署案例——每個專案都有一段故事。',
+    'case.1.loc':'台灣','case.1.title':'蘋果艙辦公室','case.1.type':'商業 · Apple Cabin',
+    'case.2.loc':'美國','case.2.title':'蘋果艙客廳','case.2.type':'住宅 · Apple Cabin',
+    'case.3.loc':'中國 嘉興','case.3.title':'南湖咖啡站','case.3.type':'餐飲 · 貨櫃屋',
+    'case.4.loc':'澳洲','case.4.title':'太空船飯店','case.4.type':'奢華住宿 · 太空膠囊',
+    'case.5.loc':'中國 杭州','case.5.title':'桐廬太空船度假村','case.5.type':'觀光 · 太空膠囊',
+    'case.6.loc':'克羅埃西亞','case.6.title':'連鎖飯店專案','case.6.type':'餐旅 · 折疊屋',
+    'trust.tag':'為何選擇我們','trust.title':'品質持久，<em>值得信賴。</em>',
+    'trust.sub':'每一棟建築都符合國際安全、耐久性與環保標準。',
+    'spec.1':'抗震等級','spec.2':'抗颱等級','spec.3':'防火等級','spec.4':'結構壽命','spec.5':'產能 / 月',
+    'cert.1':'歐洲市場','cert.2':'英國市場','cert.3':'品質管理','cert.4':'安全管理','cert.5':'環境管理','cert.6':'信用與合約',
+    'about.tag':'關於鴻記','about.title':'台灣製造。<br><em>全球交付。</em>',
+    'about.p1':'鴻記國際在台灣創立，秉持一個信念：<strong>每個企業都值得一個和他們一樣努力的空間。</strong>',
+    'about.p2':'自 2008 年起，我們擁有 <strong>19,421 平方公尺的金屬結構製造廠</strong>，210 名技術工人，配備大型雷射切割、折彎及等離子焊接設備。',
+    'about.p3':'產品出口至歐洲、亞太、非洲和美洲——我們現正<strong>積極拓展東南亞市場</strong>，為菲律賓合作夥伴提供專屬支援。',
+    'about.p4':'擁有 EU CE、UKCA 及 ISO 認證、AAA 信用評級與多項產品專利，我們是海外客戶尋求品質與可靠性的首選長期合作夥伴。',
+    'fac.1':'創立年份','fac.2':'工廠面積','fac.3':'技術工人','fac.4':'資深技師','fac.5':'頂尖設計師','fac.6':'生產產能',
+    'con.tag':'聯絡我們','con.title':'立即開始 <em>您的專案</em>',
+    'con.sub':'準備好探索模組化空間解決方案了嗎？聯絡我們的團隊，詢問產品、取得客製報價及國際運輸方案。',
+    'con.l1':'聯絡人','con.v1':'Wesley Chen — 國際業務',
+    'con.l2':'電話 / WhatsApp','con.l3':'電子郵件','con.l4':'服務市場',
+    'con.v4':'歐洲 · 亞太 · 非洲 · 美洲<br><strong style="color:var(--gold)">🇵🇭 菲律賓 — 現已開放</strong>',
+    'con.wa':'💬 WhatsApp 聯絡','con.line':'💚 加入 LINE',
+    'form.industry':'您的行業','form.product':'產品需求','form.unsure':'尚未確定 — 需要諮詢',
+    'ind.1':'餐旅 / 度假村 / 民宿','ind.2':'高爾夫 / 運動設施','ind.3':'潛水 / 海灘 / 水上運動',
+    'ind.4':'餐廳 / 餐飲','ind.5':'建設 / 房地產','ind.6':'製造 / 貿易','ind.7':'辦公 / 商業','ind.8':'其他',
+    'footer.copy':'© 2026 鴻記國際有限公司 · 成立 2008 · 台灣',
+    'submit.btn':'送出詢問 →','submit.ok':'✓ 訊息已送出！Wesley 將在 24 小時內回覆。',
+    'modal.apple.desc':'極簡模組化空間，支援無縫拼接技術。太陽能與風能供電，Low-E 雙層玻璃，鋁製、鍍鋅或竹材飾面。抗震 9 級，抗颱 17 級。',
+    'modal.starship.desc':'未來感太空艙，270° 全景窗、鋁合金框架、智能家居系統，包含聲控燈光和窗簾。僅需 1–2 天組裝，適合豪華露營和地標景點。',
+    'modal.folding.desc':'雙翼折疊式房屋，鍍鋅鋼框，便於運輸，數小時快速部署。抗震防颱，適合工地、活動及臨時商業用途。',
+    'modal.container.desc':'鋼鐵貨櫃改造為生活與商業空間，可無限疊加——單層、多層、交錯排列。高強度鋼結構，外觀可個性化設計。',
+    'modal.silent.desc':'專業隔音方案，降噪 30–40 dB。高密度隔音、LED 燈光、USB、藍牙音響、溫控。適合 1–2 人或 4–6 人使用。',
+    'modal.capsule.desc':'高端旅宿體驗。航空鋁外殼、智能門鎖、頂級寢具、智能電視、乾濕分離衛浴及 24 小時熱水。未來感設計。',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function setLang(l) {
+  currentLang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', (l === 'zh' && b.textContent === '中文') || (l === 'en' && b.textContent === 'EN'));
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[l][key] !== undefined) el.innerHTML = T[l][key];
+  });
+  const ph = {
+    en: { name:'Your Name *', email:'Email Address *', company:'Company / Project Name', msg:'Tell us about your project, location, and quantity requirements...' },
+    zh: { name:'您的姓名 *', email:'電子郵件 *', company:'公司 / 專案名稱', msg:'請告訴我們您的專案內容、地點與數量需求...' }
+  }[l];
+  document.getElementById('f-name').placeholder = ph.name;
+  document.getElementById('f-email').placeholder = ph.email;
+  document.getElementById('f-company').placeholder = ph.company;
+  document.getElementById('f-msg').placeholder = ph.msg;
+  document.getElementById('form-submit-btn').textContent = T[l]['submit.btn'];
+}
+
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Product data
 const products = {
-  apple: {
-    title: 'Apple Cabin',
-    desc: 'Minimalist modular space with seamless splicing technology. Solar & wind powered, Low-E double glass, available in aluminum, galvanized or bamboo finishes. Ideal for homestays, resorts, and commercial spaces. Seismic Mag. 9, Typhoon Level 17 resistant.',
-    imgs: ['images/apple_main.jpg','images/apple_1.jpg','images/apple_2.jpg','images/apple_3.jpg','images/apple_4.jpg','images/apple_5.jpg','images/apple_6.jpg']
-  },
-  starship: {
-    title: 'Starship Cabin',
-    desc: 'Futuristic capsule for stargazing experiences. 270° panoramic windows, aluminum alloy frames, smart home systems including voice-controlled lighting and curtains. Assembled in just 1–2 days. Perfect for luxury glamping, scenic landmarks.',
-    imgs: ['images/starship_main.jpg','images/starship_1.jpg','images/starship_2.jpg','images/starship_3.jpg','images/starship_4.jpg','images/starship_5.jpg']
-  },
-  folding: {
-    title: 'Folding Room',
-    desc: 'Double-wing folding house. Galvanized steel frame, compact for transport, fast deployment in hours. Earthquake & typhoon resistant. Flexible space expansion — ideal for construction sites, events, and temporary commercial use.',
-    imgs: ['images/folding_main.jpg','images/folding_1.jpg','images/folding_2.jpg','images/folding_3.jpg','images/folding_4.jpg','images/folding_5.jpg']
-  },
-  container: {
-    title: 'Container House',
-    desc: 'Repurposed steel containers transformed into living and commercial spaces. Stackable in infinite configurations — single story, multi-story, staggered. Steel structure frame with high strength, creative exterior personalization.',
-    imgs: ['images/container_main.jpg','images/container_1.jpg','images/container_2.jpg','images/container_3.jpg','images/container_4.jpg','images/container_5.jpg']
-  },
-  silent: {
-    title: 'Silent Cabin',
-    desc: 'Professional acoustic solution with 30–40 dB noise reduction. High-density soundproofing, damping sound insulation felt composite, silent ventilation system. LED lighting, USB interface, Bluetooth speaker, temperature control. For 1–2 or 4–6 persons.',
-    imgs: ['images/silent_main.jpg','images/silent_2.jpg','images/silent_3.jpg','images/silent_4.jpg']
-  },
-  capsule: {
-    title: 'Space Capsule',
-    desc: 'High-end travel accommodation. Aviation aluminum shell with fluorocarbon paint, smart locks, premium bedding, smart TV, full bathroom with dry-wet separation and 24h hot water. Futuristic design for luxury resort destinations.',
-    imgs: ['images/capsule_main.jpg','images/capsule_1.jpg','images/capsule_2.jpg','images/capsule_3.jpg','images/capsule_4.jpg','images/capsule_5.jpg']
-  }
+  apple:    { imgs: ['images/apple_main.jpg','images/apple_1.jpg','images/apple_2.jpg','images/apple_3.jpg','images/apple_4.jpg','images/apple_5.jpg','images/apple_6.jpg'] },
+  starship: { imgs: ['images/starship_main.jpg','images/starship_1.jpg','images/starship_2.jpg','images/starship_3.jpg','images/starship_4.jpg','images/starship_5.jpg'] },
+  folding:  { imgs: ['images/folding_main.jpg','images/folding_1.jpg','images/folding_2.jpg','images/folding_3.jpg','images/folding_4.jpg','images/folding_5.jpg'] },
+  container:{ imgs: ['images/container_main.jpg','images/container_1.jpg','images/container_2.jpg','images/container_3.jpg','images/container_4.jpg','images/container_5.jpg'] },
+  silent:   { imgs: ['images/silent_main.jpg','images/silent_2.jpg','images/silent_3.jpg','images/silent_4.jpg'] },
+  capsule:  { imgs: ['images/capsule_main.jpg','images/capsule_1.jpg','images/capsule_2.jpg','images/capsule_3.jpg','images/capsule_4.jpg','images/capsule_5.jpg'] }
+};
+
+const titleMap = {
+  apple:'Apple Cabin', starship:'Starship Cabin',
+  folding:{ en:'Folding Room', zh:'折疊屋' },
+  container:{ en:'Container House', zh:'貨櫃屋' },
+  silent:{ en:'Silent Cabin', zh:'靜音艙' },
+  capsule:{ en:'Space Capsule', zh:'太空膠囊' }
 };
 
 function openModal(key) {
   const p = products[key];
-  const modal = document.getElementById('productModal');
-  document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalDesc').textContent = p.desc;
+  const l = currentLang;
+  const t = titleMap[key];
+  document.getElementById('modalTitle').textContent = typeof t === 'string' ? t : t[l];
+  document.getElementById('modalDesc').textContent = T[l]['modal.' + key + '.desc'];
   const mainImg = document.getElementById('modalMainImg');
   mainImg.src = p.imgs[0];
   const thumbs = document.getElementById('modalThumbs');
   thumbs.innerHTML = '';
   p.imgs.forEach((src, i) => {
     const t = document.createElement('img');
-    t.src = src; t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
-    t.onclick = () => {
-      mainImg.src = src;
-      thumbs.querySelectorAll('.modal-thumb').forEach(el => el.classList.remove('active'));
-      t.classList.add('active');
-    };
+    t.src = src;
+    t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+    t.onclick = () => { mainImg.src = src; thumbs.querySelectorAll('.modal-thumb').forEach(el => el.classList.remove('active')); t.classList.add('active'); };
     thumbs.appendChild(t);
   });
-  modal.classList.add('open');
+  document.getElementById('productModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
-function closeModal() {
-  document.getElementById('productModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('productModal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-
+function closeModal() { document.getElementById('productModal').classList.remove('open'); document.body.style.overflow = ''; }
+function handleSubmit() { alert(T[currentLang]['submit.ok']); }
+document.getElementById('productModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+setLang(currentLang);
 </script>
 </body>
 </html>
