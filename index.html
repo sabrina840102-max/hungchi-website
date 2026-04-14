@@ -153,7 +153,7 @@ section { padding: 6rem 4rem; }
 #contact { padding: 6rem 4rem; background: var(--black); }
 #contact .section-title { color: var(--white); }
 #contact .section-sub { color: rgba(250,250,248,0.5); }
-.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; }
+.contact-layout { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-top: 3.5rem; max-width: 600px; }
 .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 2rem; }
 .contact-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
 .contact-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.3rem; }
@@ -317,7 +317,7 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
   <p class="section-sub" data-i18n="port.sub">Real deployments across Asia-Pacific, Europe, the Americas and Africa — every project tells a story.</p>
   <div class="portfolio-grid fade-in">
     <div class="portfolio-card"><div class="portfolio-img"><img src="images/case_taiwan.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇹🇼</div><div class="portfolio-location" data-i18n="case.1.loc">Taiwan</div><div class="portfolio-title" data-i18n="case.1.title">Apple Cabin Office</div><div class="portfolio-type" data-i18n="case.1.type">Commercial · Apple Cabin</div></div></div>
-    <div class="portfolio-card"><div class="portfolio-img"><img src="images/apple_2.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇺🇸</div><div class="portfolio-location" data-i18n="case.2.loc">United States</div><div class="portfolio-title" data-i18n="case.2.title">Apple Cabin Living Room</div><div class="portfolio-type" data-i18n="case.2.type">Residential · Apple Cabin</div></div></div>
+    <div class="portfolio-card"><div class="portfolio-img"><img src="images/apple_2.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇨🇳</div><div class="portfolio-location" data-i18n="case.2.loc">China</div><div class="portfolio-title" data-i18n="case.2.title">Apple Cabin Coffee Shop</div><div class="portfolio-type" data-i18n="case.2.type">F&amp;B · Apple Cabin</div></div></div>
     <div class="portfolio-card"><div class="portfolio-img"><img src="images/case_jiaxing.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇨🇳</div><div class="portfolio-location" data-i18n="case.3.loc">Jiaxing, China</div><div class="portfolio-title" data-i18n="case.3.title">Nanhu Coffee Station</div><div class="portfolio-type" data-i18n="case.3.type">F&amp;B · Container</div></div></div>
     <div class="portfolio-card"><div class="portfolio-img"><img src="images/capsule_1.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇦🇺</div><div class="portfolio-location" data-i18n="case.4.loc">Australia</div><div class="portfolio-title" data-i18n="case.4.title">Spacecraft Hotel</div><div class="portfolio-type" data-i18n="case.4.type">Luxury Stay · Space Capsule</div></div></div>
     <div class="portfolio-card"><div class="portfolio-img"><img src="images/capsule_2.jpg" alt=""></div><div class="portfolio-meta"><div class="portfolio-flag">🇨🇳</div><div class="portfolio-location" data-i18n="case.5.loc">Hangzhou, China</div><div class="portfolio-title" data-i18n="case.5.title">Tonglu Spacecraft Resort</div><div class="portfolio-type" data-i18n="case.5.type">Tourism · Space Capsule</div></div></div>
@@ -385,38 +385,6 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
         <a href="https://line.me/ti/p/Cfcb2TSRJg" class="btn-line" target="_blank" data-i18n="con.line">💚 Add on LINE</a>
       </div>
     </div>
-    <div class="contact-form">
-      <div class="form-row"><input type="text" id="f-name" placeholder="Your Name *"></div>
-      <div class="form-row"><input type="tel" id="f-phone" placeholder="Phone / WhatsApp *"></div>
-      <div class="form-row"><input type="text" id="f-company" placeholder="Company / Project Name"></div>
-      <div class="form-row">
-        <select id="f-industry">
-          <option value="" disabled selected data-i18n="form.industry">Your Industry</option>
-          <option data-i18n="ind.1">Hospitality / Resort / Homestay</option>
-          <option data-i18n="ind.2">Golf Club / Sports Facility</option>
-          <option data-i18n="ind.3">Diving / Beach / Water Sports</option>
-          <option data-i18n="ind.4">Restaurant / F&amp;B</option>
-          <option data-i18n="ind.5">Construction / Real Estate</option>
-          <option data-i18n="ind.6">Manufacturing / Trade</option>
-          <option data-i18n="ind.7">Office / Commercial</option>
-          <option data-i18n="ind.8">Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <select id="f-product">
-          <option value="" disabled selected data-i18n="form.product">Product Interest</option>
-          <option>Apple Cabin</option>
-          <option>Starship Cabin</option>
-          <option data-i18n="p.folding.name">Folding Room</option>
-          <option data-i18n="p.container.name">Container House</option>
-          <option data-i18n="p.silent.name">Silent Cabin</option>
-          <option data-i18n="p.capsule.name">Space Capsule</option>
-          <option data-i18n="form.unsure">Not Sure — Need Consultation</option>
-        </select>
-      </div>
-      <div class="form-row"><textarea id="f-msg" placeholder="Tell us about your project, location, and quantity requirements..."></textarea></div>
-      <button class="form-submit" id="form-submit-btn" onclick="handleSubmit()">Send Inquiry →</button>
-    </div>
   </div>
 </section>
 
@@ -477,7 +445,7 @@ const T = {
     'port.tag':'Portfolio','port.title':'Proven Projects, <em>Global Reach</em>',
     'port.sub':'Real deployments across Asia-Pacific, Europe, the Americas and Africa — every project tells a story.',
     'case.1.loc':'Taiwan','case.1.title':'Apple Cabin Office','case.1.type':'Commercial · Apple Cabin',
-    'case.2.loc':'United States','case.2.title':'Apple Cabin Living Room','case.2.type':'Residential · Apple Cabin',
+    'case.2.loc':'China','case.2.title':'Apple Cabin Coffee Shop','case.2.type':'F&amp;B · Apple Cabin',
     'case.3.loc':'Jiaxing, China','case.3.title':'Nanhu Coffee Station','case.3.type':'F&amp;B · Container',
     'case.4.loc':'Australia','case.4.title':'Spacecraft Hotel','case.4.type':'Luxury Stay · Space Capsule',
     'case.5.loc':'Hangzhou, China','case.5.title':'Tonglu Spacecraft Resort','case.5.type':'Tourism · Space Capsule',
@@ -551,7 +519,7 @@ const T = {
     'port.tag':'作品集','port.title':'實績案例，<em>遍佈全球</em>',
     'port.sub':'橫跨亞太、歐洲、美洲與非洲的真實部署案例——每個專案都有一段故事。',
     'case.1.loc':'台灣','case.1.title':'蘋果艙辦公室','case.1.type':'商業 · Apple Cabin',
-    'case.2.loc':'美國','case.2.title':'蘋果艙客廳','case.2.type':'住宅 · Apple Cabin',
+    'case.2.loc':'中國','case.2.title':'蘋果艙咖啡館','case.2.type':'餐飲 · Apple Cabin',
     'case.3.loc':'中國 嘉興','case.3.title':'南湖咖啡站','case.3.type':'餐飲 · 貨櫃屋',
     'case.4.loc':'澳洲','case.4.title':'太空船飯店','case.4.type':'奢華住宿 · 太空膠囊',
     'case.5.loc':'中國 杭州','case.5.title':'桐廬太空船度假村','case.5.type':'觀光 · 太空膠囊',
