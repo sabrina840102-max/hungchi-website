@@ -42,8 +42,7 @@ nav {
 .hero-bg { position: absolute; inset: 0; background: url('images/hero_apple_cabin.jpg') center/cover no-repeat; }
 .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.2) 100%); }
 .hero-content { position: relative; z-index: 1; padding: 0 4rem 6rem; max-width: 900px; }
-.hero-tag { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-.hero-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+.hero-tag { display: none; }
 .hero-h1 { font-family: var(--ff-display); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 1rem; }
 .hero-h1 em { font-style: italic; color: var(--gold); }
 .hero-sub { font-size: 1rem; color: rgba(250,250,248,0.65); line-height: 1.7; max-width: 500px; margin-bottom: 2.5rem; }
@@ -242,11 +241,6 @@ footer { background: var(--black); border-top: 1px solid var(--border); padding:
       <a href="#products" class="btn-primary" data-i18n="hero.cta1">Explore Products ↓</a>
       <a href="https://line.me/ti/p/Cfcb2TSRJg" class="btn-secondary" target="_blank" data-i18n="hero.cta2">💚 LINE Us</a>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">500</div><div class="stat-label" data-i18n="stat.1">Units / Month</div></div>
-    <div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-i18n="stat.2">Countries Served</div></div>
-    <div class="stat"><div class="stat-num">70+</div><div class="stat-label" data-i18n="stat.3">Year Lifespan</div></div>
   </div>
 </section>
 
